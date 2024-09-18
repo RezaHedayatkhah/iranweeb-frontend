@@ -1,7 +1,7 @@
 "use client"
 import Filter from "@/app/(main)/[contentType]/_components/Filter";
 import {useSearchParams} from "next/navigation";
-import {useState} from "react";
+import {Suspense, useState} from "react";
 import {useEffect} from "react";
 import PostCard from "@/app/_components/PostCard";
 
@@ -33,7 +33,9 @@ export default function page() {
     return (
         <div
             className="flex md:flex-row flex-col justify-between w-11/12 md:w-4/5 m-auto pt-40 gap-5 md:gap-20 text-white">
-            <Filter/>
+            <Suspense>
+                <Filter/>
+            </Suspense>
 
             <div
                 className="flex flex-col justify-between rounded-xl bg-gray-800  w-full md:w-3/4 py-3 px-3 md:px-5">
