@@ -1,33 +1,13 @@
 "use client"
 import Link from "next/link";
 import {useUser} from "@/context/UserContext";
-import {useSearchParams, usePathname, useRouter} from 'next/navigation';
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faSearch} from "@fortawesome/free-solid-svg-icons";
-import {useState} from "react";
+import {Suspense, useState} from "react";
+import Search from "@/app/_components/Search";
 
 export default function Navbar() {
     const {user} = useUser()
-    const router = useRouter();
     const [isActive, setActive] = useState(false);
-    const searchParams = useSearchParams();
-    const pathname = usePathname();
-    const {replace} = useRouter();
-    const params = new URLSearchParams(searchParams);
 
-    function handleSearch(term) {
-        if (term) {
-            params.set('query', term);
-        } else {
-            params.delete('query');
-        }
-        replace(`${pathname}?${params.toString()}`);
-    }
-
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        router.push(`search/${pathname}?${params.toString()}`)
-    }
 
     const handleClick = (e) => {
         setActive(!isActive)
@@ -59,20 +39,9 @@ export default function Navbar() {
                 <div className="flex items-center gap-2 md:w-1/3">
                     <div
                         className={`items-center justify-between bg-[#151f30] rounded-full text-gray-400 px-3 w-full md:flex hidden`}>
-                        <form className="w-full flex justify-center items-center" name="search" method="get"
-                              onSubmit={handleSubmit}>
-                            <input type="text"
-                                   className="w-full rounded-full focus:outline-none bg-[#151f30] h-7 px-3"
-                                   name="query"
-                                   onChange={(e) => {
-                                       handleSearch(e.target.value);
-                                   }}
-                                   defaultValue={searchParams.get('query')?.toString()}
-                            />
-                            <button type="submit">
-                                <FontAwesomeIcon icon={faSearch} className={"hover:text-red-500"}/>
-                            </button>
-                        </form>
+                        <Suspense>
+                            <Search />
+                        </Suspense>
                     </div>
                     {user ? (<Link href="/dashboard" className="hover:text-red-500"
                                    aria-label="Dashboard">داشبورد</Link>) : (
@@ -93,20 +62,11 @@ export default function Navbar() {
             </div>
             <div
                 className="flex items-center justify-between bg-[#151f30] rounded-full text-gray-400 px-3 w-full md:hidden mt-3">
-                <form className="w-full flex justify-center items-center" name="search" method="get"
-                      onSubmit={handleSubmit}>
-                    <input type="text"
-                           className="w-full rounded-full focus:outline-none bg-[#151f30] h-7 px-3"
-                           name="query"
-                           onChange={(e) => {
-                               handleSearch(e.target.value);
-                           }}
-                           defaultValue={searchParams.get('query')?.toString()}
-                    />
-                    <button type="submit">
-                        <FontAwesomeIcon icon={faSearch} className={"hover:text-red-500"}/>
-                    </button>
-                </form>
+
+                <Suspense>
+                    <Search />
+                </Suspense>
+
             </div>
         </header>
     )
