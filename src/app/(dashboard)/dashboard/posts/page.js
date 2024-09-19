@@ -84,8 +84,7 @@ export default function Page() {
                                 <td className="p-5 text-sm">
                                     <Image
                                         className="rounded-xl aspect-[2/3] w-16 md:w-20 cursor-pointer transition ease-in-out duration-300  hover:scale-150"
-                                        src={post.imageUrl ? `/images/${post?.imageUrl}` : ''}
-
+                                        src={post.imageUrl ? `${process.env.NEXT_PUBLIC_IMAGES_URL}/${post?.imageUrl}` : ''}
                                         width={80}
                                         height={80}
                                         alt={post.slug}/>

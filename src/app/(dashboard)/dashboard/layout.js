@@ -9,6 +9,7 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faBars} from "@fortawesome/free-solid-svg-icons";
 import "@/app/globals.css";
 import {useState} from "react";
+import {Toaster} from "react-hot-toast";
 
 
 config.autoAddCss = false
@@ -27,6 +28,7 @@ export default function DashboardLayout({children}) {
 
         <div className="bg-[#131720]">
             <UserProvider>
+                <Toaster/>
 
 
                 <div>

@@ -40,7 +40,7 @@ export default function Home() {
                 'limit': '24',
             });
             try {
-                const res = await fetch("http://localhost:4000/api/posts?" + params, {
+                const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/posts?` + params, {
                     method: "GET",
                     headers: {
                         Accept: "application/json",

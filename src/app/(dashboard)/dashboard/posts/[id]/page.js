@@ -3,6 +3,7 @@ import {useState, useEffect} from "react";
 import {toast} from "react-hot-toast";
 import {updatePost} from "@/app/(dashboard)/dashboard/posts/_lib/api";
 import AddLink from "@/app/(dashboard)/dashboard/posts/_components/AddLink";
+import process from "next/dist/build/webpack/loaders/resolve-url-loader/lib/postcss";
 
 export default function Page({params}) {
     const [formData, setFormData] = useState({});
@@ -25,7 +26,7 @@ export default function Page({params}) {
             const data = await res.json();
             if(res.ok){
                 setFormData(data);
-                setOldImage(`/images/${data?.imageUrl}`)
+                setOldImage(`${process.env.NEXT_PUBLIC_IMAGES_URL}/${data?.imageUrl}`)
                 setIsLoading(false)
             }
         }

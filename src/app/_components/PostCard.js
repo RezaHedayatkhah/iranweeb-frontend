@@ -24,7 +24,7 @@ export default function PostCard({post}) {
                     <FontAwesomeIcon icon={faBookOpenReader}
                                      className={"scale-0 group-hover:scale-100 transition-transform duration-300 ease-in-out text-4xl"}/>
                 </div>
-                <Image src={`/images/${post?.imageUrl}`} alt={post.slug}
+                <Image src={`${process.env.NEXT_PUBLIC_IMAGES_URL}/${post?.imageUrl}`} alt={post.slug}
                        width={0}
                        height={0}
                        sizes={"100vw"}

@@ -5,11 +5,12 @@ import {useEffect, useState} from "react";
 import Link from "next/link";
 import Modal from "@/app/_components/Modal";
 import {toast} from "react-hot-toast";
+import {useUser} from "@/context/UserContext";
 
 export default function DownloadLink({downloadLinks, postId}){
     const [purchasedLinks, setPurchasedLinks] = useState([]);
     const [isModalOpen, setIsModalOpen] = useState(false);
-
+    const {user} = useUser()
     const openModal = () => setIsModalOpen(true);
     const closeModal = () => setIsModalOpen(false);
 
@@ -34,19 +35,20 @@ export default function DownloadLink({downloadLinks, postId}){
     }
 
     async function fetchLinks (){
-        const res = await fetch(process.env.NEXT_PUBLIC_API_URL + `/api/transactions/${postId}`, {
-            method: "GET",
-            headers: {
-                "Content-Type": "application/json",
-                "Accept": "application/json",
-            },
-            credentials: "include",
-        })
+        if (user){
+            const res = await fetch(process.env.NEXT_PUBLIC_API_URL + `/api/transactions/${postId}`, {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Accept": "application/json",
+                },
+                credentials: "include",
+            })
 
-        const data = await res.json();
-        if (res.ok) {
-            setPurchasedLinks(data)
-            console.log(data)
+            const data = await res.json();
+            if (res.ok) {
+                setPurchasedLinks(data)
+            }
         }
     }
 

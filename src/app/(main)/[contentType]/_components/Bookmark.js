@@ -12,20 +12,22 @@ export default function Bookmark({postId}){
     const {user} = useUser();
 
     const fetchBookmark = async () => {
-        const res = await fetch(process.env.NEXT_PUBLIC_API_URL+ `/api/bookmarks/${postId}`,{
-            method: "GET",
-            headers: {
-                "Content-Type": "application/json",
-                "Accept": "application/json",
-            },
-            credentials: 'include', // Ensures cookies are sent with the request
-        });
+        if(user){
+            const res = await fetch(process.env.NEXT_PUBLIC_API_URL+ `/api/bookmarks/${postId}`,{
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Accept": "application/json",
+                },
+                credentials: 'include', // Ensures cookies are sent with the request
+            });
 
-        const data = await res.json();
-        if (data.bookmarks) {
-            setBookmarked(true)
-        }else {
-            setBookmarked(false);
+            const data = await res.json();
+            if (data.bookmarks) {
+                setBookmarked(true)
+            }else {
+                setBookmarked(false);
+            }
         }
     }
 
