@@ -61,7 +61,7 @@ export default function Hero() {
         <div ref={slideShowRef}>
             {posts.map((post) => (
                     <div key={post.id} className="mySlides w-full bg-no-repeat bg-cover bg-center"
-                         style={{backgroundImage: `url(/images/${post.backgroundImageUrl})`}}>
+                         style={{backgroundImage: `url(${process.env.NEXT_PUBLIC_IMAGES_URL}/${post?.imageUrl})`}}>
                         <div className="bg-gradient-to-t from-gray-950 from-5%">
                             <div
                                 className="bg-gradient-to-tl from-[#131720] from-20% to-pink-800/10 w-full h-full pt-40 flex flex-col">
