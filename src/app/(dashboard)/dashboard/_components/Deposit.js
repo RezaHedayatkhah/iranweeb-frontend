@@ -25,7 +25,7 @@ export default function Deposit() {
 
         const data = await res.json();
         if (res.ok) {
-            await router.push(data);
+            await router.push(data.url);
         } else {
             toast.error(data.message);
         }

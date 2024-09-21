@@ -68,7 +68,7 @@ export default function page() {
                                 <td className="p-5 text-sm">
                                     <Image
                                         className="rounded-xl aspect-[2/3] w-16 md:w-20 cursor-pointer transition ease-in-out duration-300  hover:scale-150"
-                                        src={transaction.downloadLink.post.imageUrl ? transaction.downloadLink.post.imageUrl : ''}
+                                        src={transaction.downloadLink.post.imageUrl ? `${process.env.NEXT_PUBLIC_IMAGES_URL}/${transaction.downloadLink.post.imageUrl}` : ''}
                                         width={80}
                                         height={80}
                                         alt={transaction.downloadLink.post.slug}/>

@@ -121,11 +121,16 @@ export default function AddLink({ postId, sendLinksToParent }) {
                         {/* Price */}
                         <input
                             type="number"
-                            value={link.price}
-                            onChange={(e) => handleLinkChange(index, "price", e.target.value)}
-                            placeholder="قیمت"
+                            value={link.price / 10} // Display the price in tomans
+                            onChange={(e) => {
+                                const tomanPrice = e.target.value;
+                                const rialPrice = tomanPrice * 10; // Convert tomans to rials
+                                handleLinkChange(index, "price", rialPrice); // Save the price in rials
+                            }}
+                            placeholder="قیمت به تومان"
                             className="text-white bg-[#151f30] focus:outline-none focus:border-2 focus:border-red-500 rounded-2xl px-5 h-11"
                         />
+
 
                         {/* Quality */}
                         <select

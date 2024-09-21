@@ -50,7 +50,7 @@ export default function page({params}) {
                 <tbody>
                 <tr className="bg-[#151f30] ">
                     <td  className="rounded-r-2xl p-5 text-sm">{transaction.id}</td>
-                    <td className="p-5 text-sm">{transaction.amount}</td>
+                    <td className="p-5 text-sm">{transaction.amount?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
                     <td className="p-5 text-sm">{transaction.type}</td>
                     <td className="p-5 text-sm">{transaction.status}</td>
                     <td className="p-5 text-sm">{transaction.description}</td>

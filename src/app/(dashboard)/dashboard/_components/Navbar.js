@@ -17,7 +17,7 @@ export default function Navbar({isActive}) {
 
     return (
         <div
-             className={`z-50 flex flex-col bg-[#131720] border-l border-blue-500 border-opacity-10 w-5/6 md:w-1/6 text-white h-screen  fixed top-0 md:-right-0 md:relative transform transition-transform duration-300 md:transform-none ${isActive && "translate-x-full translate-x-0"}`}>
+             className={`z-50 flex flex-col bg-[#131720] border-l border-blue-500 border-opacity-10 w-5/6 md:w-1/6 text-white h-screen  fixed top-0 md:-right-0 md:relative transform transition-transform duration-300 md:transform-none ${isActive ? "translate-x-0" : "translate-x-full"}`}>
             <h1 className="p-5 text-3xl border-b border-blue-500 border-opacity-10"><Link href="/">Iran<span
                 className="text-red-500">Weeb</span></Link>
             </h1>
@@ -27,7 +27,7 @@ export default function Navbar({isActive}) {
                 <div className="flex flex-col">
                     <span className="text-gray-500 text-sm">{user?.role}</span>
                     <span className="text-lg">{user?.userName}</span>
-                    <span className="text-sm text-gray-400">{user?.balance.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} تومان</span>
+                    <span className="text-sm text-gray-400">{(user?.balance / 10).toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} تومان</span>
                 </div>
             </div>
             <div className="pr-5 flex flex-col gap-5">

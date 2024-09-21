@@ -16,18 +16,35 @@ import {
 import NotFound from "next/dist/client/components/not-found-error";
 
 const getPost = async (contentType, slug) => {
-    const res = await fetch(process.env.NEXT_PUBLIC_API_URL + `/api/posts/single/${contentType.toUpperCase()}/` + slug, {
-        cache: 'no-store',
-        headers: {
-            "Content-Type": "application/json",
-            "accept": "application/json",
-        }
-    });
+    try {
+        const url = `${process.env.NEXT_PUBLIC_API_URL}/api/posts/single/${contentType.toUpperCase()}/${slug}`;
+        const res = await fetch(url, {
+            next: { tags: ['posts'] },
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json",
+            },
+        });
 
-    const data = await res.json()
-    if (!data.post) notFound()
-    return data.post
+        // Handle non-200 responses
+        if (!res.ok) {
+            return notFound();
+        }
+
+        const data = await res.json();
+
+        // Check if the data contains a valid post
+        if (!data?.post) {
+            return notFound();
+        }
+
+        return data.post;
+
+    } catch (error) {
+        return notFound(); // Handle fetch errors (network or others)
+    }
 };
+
 
 export async function generateMetadata({params}) {
     let post = await getPost(params.contentType, params.slug)
@@ -117,28 +134,28 @@ export default async function page({params}) {
                             <div className="grid grid-cols-2 md:grid-cols-4 gap-5">
                                 <li className="grid grid-cols-1 gap-y-2 rounded-xl bg-gray-300 bg-opacity-25 p-2">
                                     <div className="flex items-center gap-x-1">
-                                        <FontAwesomeIcon icon={faBook} className={"text-yellow-500 text-base"} />
+                                        <FontAwesomeIcon icon={faBook} className={"text-yellow-500 text-base h-4"} />
                                         <span>نوع:</span>
                                     </div>
                                     <span>{post.contentType}</span>
                                 </li>
                                 <li className="grid grid-cols-1 gap-y-2 rounded-xl bg-gray-300 bg-opacity-25 p-2">
                                     <div className="flex items-center gap-x-1">
-                                        <FontAwesomeIcon icon={faCalendarDays} className={"text-yellow-500 text-base"} />
+                                        <FontAwesomeIcon icon={faCalendarDays} className={"text-yellow-500 text-base h-4"} />
                                         <span>تاریخ انتشار:</span>
                                     </div>
                                     <span>{post.releaseDate}</span>
                                 </li>
                                 <li className="grid grid-cols-1 gap-y-2 rounded-xl bg-gray-300 bg-opacity-25 p-2">
                                     <div className="flex items-center gap-x-1">
-                                        <FontAwesomeIcon icon={faCircleExclamation} className={"text-yellow-500 text-base"} />
+                                        <FontAwesomeIcon icon={faCircleExclamation} className={"text-yellow-500 text-base h-4"} />
                                         <span>وضعیت:</span>
                                     </div>
                                     <span>{post.status}</span>
                                 </li>
                                 <li className="grid grid-cols-1 gap-y-2 rounded-xl bg-gray-300 bg-opacity-25 p-2">
                                     <div className="flex items-center gap-x-1 ">
-                                        <FontAwesomeIcon icon={faEarthAmericas} className={"text-yellow-500 text-base"} />
+                                        <FontAwesomeIcon icon={faEarthAmericas} className={"text-yellow-500 text-base h-4"} />
                                         <span>محصول:</span>
                                     </div>
                                     <span>{post.countryOfOrigin}</span>
@@ -146,28 +163,28 @@ export default async function page({params}) {
 
                                 <li className="grid grid-cols-1 gap-y-2 rounded-xl bg-gray-300 bg-opacity-25 p-2">
                                     <div className="flex items-center gap-x-1">
-                                        <FontAwesomeIcon icon={faLanguage} className={"text-yellow-500 text-base"} />
+                                        <FontAwesomeIcon icon={faLanguage} className={"text-yellow-500 text-base h-4"} />
                                         <span>زبان:</span>
                                     </div>
                                     <span>{post.language}</span>
                                 </li>
                                 <li className="grid grid-cols-1 gap-y-2 rounded-xl bg-gray-300 bg-opacity-25 p-2">
                                     <div className="flex items-center gap-x-1">
-                                        <FontAwesomeIcon icon={faNoteSticky} className={"text-yellow-500 text-base"} />
+                                        <FontAwesomeIcon icon={faNoteSticky} className={"text-yellow-500 text-base h-4"} />
                                         <span>چپترها:</span>
                                     </div>
                                     <span>{post.chapterCount}</span>
                                 </li>
                                 <li className="grid grid-cols-1 gap-y-2 rounded-xl bg-gray-300 bg-opacity-25 p-2">
                                     <div className="flex items-center gap-x-1">
-                                        <FontAwesomeIcon icon={faEye} className={"text-yellow-500 text-base"} />
+                                        <FontAwesomeIcon icon={faEye} className={"text-yellow-500 text-base h-4"} />
                                         <span>بازدیدها:</span>
                                     </div>
                                     <span>{post.viewCount}</span>
                                 </li>
                                 <li className="grid grid-cols-1 gap-y-2 rounded-xl bg-gray-300 bg-opacity-25 p-2">
                                     <div className="flex items-center gap-x-1">
-                                        <FontAwesomeIcon icon={faAt} className={"text-yellow-500 text-base"} />
+                                        <FontAwesomeIcon icon={faAt} className={"text-yellow-500 text-base h-4"} />
                                         <span>منبع:</span>
                                     </div>
                                     <span>

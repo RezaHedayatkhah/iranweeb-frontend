@@ -55,12 +55,21 @@ export default function RootLayout({children}) {
 
             <footer
                 className="flex w-full bg-[#151f30] items-center justify-center h-44 md:h-32 mt-20">
-                <div className="footer-sec1">
-                    <p>
-                        کلیه حقوق این وبسایت محفوظ است
-                    </p>
+                <div className={"flex justify-between  items-center w-full px-5 md:px-0 md:w-9/12"}>
+                    <a referrerPolicy='origin' target='_blank'
+                       href='https://trustseal.enamad.ir/?id=528665&Code=wPw86Ztxuygks40orN77AIHRYS8ypr0P'><img
+                        referrerPolicy='origin'
+                        src='https://trustseal.enamad.ir/logo.aspx?id=528665&Code=wPw86Ztxuygks40orN77AIHRYS8ypr0P'
+                        alt=''
+                        style={{cursor: "pointer"}} code='wPw86Ztxuygks40orN77AIHRYS8ypr0P'/></a>
+                    <div className="footer-sec1">
+                        <p>
+                            کلیه حقوق این وبسایت محفوظ است
+                        </p>
+                    </div>
+                    <a href="https://bitpay.ir/certificate-480482-iranweeb.ir" target="_blank"><img
+                        src="https://bitpay.ir/theme/public/images/trusted-logo.svg"/></a>
                 </div>
-
             </footer>
 
         </UserProvider>

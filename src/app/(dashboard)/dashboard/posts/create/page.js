@@ -4,6 +4,7 @@ import {toast} from "react-hot-toast";
 import Select from "react-select";
 import {createPost} from "@/app/(dashboard)/dashboard/posts/_lib/api";
 import AddLink from "@/app/(dashboard)/dashboard/posts/_components/AddLink";
+import revalidateTag from "@/app/(dashboard)/dashboard/posts/_lib/revalidate";
 
 export default function Page() {
     const [formData, setFormData] = useState({
@@ -85,6 +86,7 @@ export default function Page() {
                 });
             }
         } else {
+            await revalidateTag("posts");
             if (data.message) {
                 toast.success(data.message, {
                     style: {

@@ -7,8 +7,6 @@ export async function middleware(req) {
     const secret = new TextEncoder().encode(process.env.JWT_SECRET);
     const { pathname } = req.nextUrl;
 
-    console.log(token)
-    console.log(secret)
     try {
         if (token) {
             // Verify the token using `jose`
@@ -31,7 +29,6 @@ export async function middleware(req) {
             return NextResponse.next();
         }
     } catch (error) {
-        console.log(error)
         // Redirect to login if token verification fails
         if (pathname.startsWith('/dashboard')) {
             return NextResponse.redirect(new URL('/login', req.url));
