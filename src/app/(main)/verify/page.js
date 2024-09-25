@@ -1,25 +1,36 @@
-"use client";
+'use client'
+
 import {useEffect, useState} from "react";
 import { toast } from "react-hot-toast";
+import { useSearchParams } from "next/navigation";
 
-export default function page({params}) {
+export default function page() {
     const [transaction, setTransaction] = useState({});
+    const searchParams = useSearchParams(); // Use this to get query params in a client-side component
+    const transId = searchParams.get("trans_id");
+    const idGet = searchParams.get("id_get");
+    const factorId = searchParams.get("factorId");
+
     useEffect(() => {
         async function verifyTransaction() {
             try {
                 // Fetching verification result
-                const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/transactions/verify/${params.id}`, {
-                    method: "GET",
+                const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/verify`, {
+                    method: "POST",
                     headers: {
                         "Content-Type": "application/json",
                         "Accept": "application/json",
                     },
+                    body: JSON.stringify({transId, idGet, factorId}),
                 });
 
                 const data = await res.json();
 
                 // Handling the response with toast notifications
                 if (res.ok) {
+                    if (data.message){
+                        toast.success(data.message);
+                    }
                     setTransaction(data)
                 } else {
                     toast.error(data.message);
@@ -32,7 +43,7 @@ export default function page({params}) {
 
         // Calling the verification function
         verifyTransaction();
-    }, []); // Dependency on params for the effect
+    }, [transId, idGet, factorId]); // Dependency on params for the effect
 
     return (
         <div className="overflow-x-auto p-5 md:w-1/2 m-auto">
