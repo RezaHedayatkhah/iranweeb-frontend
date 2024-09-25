@@ -10,6 +10,14 @@ const nextConfig = {
             },
         ],
     },
+    experimental: {
+        serverActions: {
+            allowedOrigins: [
+                'http://localhost',
+                'https://bitpay.ir',
+            ]
+        }
+    },
     async headers() {
         return [
             {

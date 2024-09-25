@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 import Modal from "@/app/_components/Modal";
 import { useState } from "react";
 
-export default function Deposit() {
+export default function POST() {
     const router = useRouter();
     const [amount, setAmount] = useState(10000);
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -13,7 +13,7 @@ export default function Deposit() {
     const closeModal = () => setIsModalOpen(false);
 
     const handleClick = async () => {
-        const res = await fetch(process.env.NEXT_PUBLIC_API_URL + "/api/deposit", {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/deposit`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -25,7 +25,20 @@ export default function Deposit() {
 
         const data = await res.json();
         if (res.ok) {
-            await router.push(data.url);
+            const response = await fetch('/api/deposit',{
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Accept": "application/json",
+                },
+                body: JSON.stringify({ amountInRials: data.amount, factorId: data.id }),
+            })
+            const responseData = await response.json();
+            if (response.ok){
+                await router.push(responseData.url);
+            }else {
+                toast.error(responseData.message);
+            }
         } else {
             toast.error(data.message);
         }
