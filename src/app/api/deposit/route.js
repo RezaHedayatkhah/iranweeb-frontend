@@ -28,7 +28,8 @@ export async function POST(req) {
             {
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded',
-                    'X-Forwarded-For': clientIp // Pass on client's IP address
+                    'X-Forwarded-For': clientIp, // Pass on client's IP address
+                    'Origin': 'https://iranweeb2.liara.run', // Set the expected Origin
                 }
             }
         );
