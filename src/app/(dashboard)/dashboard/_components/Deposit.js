@@ -25,23 +25,11 @@ export default function POST() {
 
         const data = await res.json();
         if (res.ok) {
-            const response = await fetch('/api/deposit',{
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    "Accept": "application/json",
-                },
-                body: JSON.stringify({ amountInRials: data.amount, factorId: data.id }),
-            })
-            const responseData = await response.json();
-            if (response.ok){
-                await router.push(responseData.url);
-            }else {
-                toast.error(responseData.message);
-            }
+            await router.push(data.url);
         } else {
             toast.error(data.message);
         }
+        console.log(data)
     };
 
     return (
