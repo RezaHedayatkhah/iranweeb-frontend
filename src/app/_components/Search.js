@@ -33,7 +33,7 @@ export default function Search() {
     };
 
     return (
-        <div className={`items-center justify-between bg-[#151f30] rounded-full text-gray-400 px-3 w-full md:flex hidden`}>
+        <div className={`items-center justify-between bg-[#151f30] rounded-full text-gray-400 px-3 w-full flex `}>
             <form className="w-full flex justify-center items-center" name="search" method="get" onSubmit={handleSubmit}>
                 <input
                     type="text"

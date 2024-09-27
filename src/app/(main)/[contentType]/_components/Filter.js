@@ -50,13 +50,13 @@ export default function Filter() {
 
     return (
         <form
-            className="md:w-1/4 w-full h-fit flex flex-col gap-5 bg-gray-800 rounded-xl p-5"
+            className="w-full h-fit flex flex-col gap-5 bg-gray-800 rounded-xl p-5"
             id="filter"
             onSubmit={handleSubmit}
         >
             <div className="flex flex-col gap-0.5">
                 <span className="border-b-2 border-red-500 w-fit mb-3 text-lg">ژانرها</span>
-                <div className="flex flex-wrap gap-3">
+                <div className="flex flex-wrap gap-2">
                     {genres.map((genre) => (
                         <div key={genre.id} className="flex">
                             <input

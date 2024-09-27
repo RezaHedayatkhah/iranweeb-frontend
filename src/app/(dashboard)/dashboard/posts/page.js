@@ -31,7 +31,7 @@ export default function Page() {
                     });
                 }
             } else {
-                setPosts(data)
+                setPosts(data.posts)
             }
 
         }

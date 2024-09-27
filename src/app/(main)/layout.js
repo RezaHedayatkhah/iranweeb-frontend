@@ -8,7 +8,7 @@ import {faTelegram} from "@fortawesome/free-brands-svg-icons";
 import Script from "next/script";
 
 export const metadata = {
-    title: 'ایران ویب IranWeeb',
+    title: 'ایران ویب: مرجع مانگا، مانهوا و مانها با ترجمه فارسی',
     description: 'با ایران ویب، هزاران مانگا و منهوا را به صورت رایگان دانلود کنید! اکتشاف داستان‌های هیجان‌انگیز و جذاب در وبسایت ما. به ما بپیوندید و جهان خیالی خود را کشف کنید!',
 }
 

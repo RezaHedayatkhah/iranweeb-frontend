@@ -13,7 +13,7 @@ export default function Home() {
     useEffect(() => {
         const params = new URLSearchParams({
             'sortBy': 'date',
-            'limit': '10',
+            'pageSize': '10',
         });
         // Fetch latest posts
         const fetchLatestPosts = async () => {
@@ -26,7 +26,7 @@ export default function Home() {
                 });
                 const data = await res.json();
                 if (res.ok) {
-                    setLatestPosts(data);
+                    setLatestPosts(data.posts);
                 }
             } catch (error) {
                 console.error("Error fetching latest posts:", error);
@@ -37,7 +37,7 @@ export default function Home() {
         const fetchMostViewedPosts = async () => {
             const params = new URLSearchParams({
                 'sortBy': 'viewCount',
-                'limit': '24',
+                'pageSize': '24',
             });
             try {
                 const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/posts?` + params, {
@@ -48,7 +48,7 @@ export default function Home() {
                 });
                 const data = await res.json();
                 if (res.ok) {
-                    setMostViewedPosts(data);
+                    setMostViewedPosts(data.posts);
                 }
             } catch (error) {
                 console.error("Error fetching most viewed posts:", error);
