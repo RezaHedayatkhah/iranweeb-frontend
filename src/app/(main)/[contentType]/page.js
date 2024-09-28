@@ -56,7 +56,7 @@ export default function Page({ params }) {
     };
 
     return (
-        <div className="grid grid-cols-1 gap-y-6 p-3 md:grid-cols-4 md:gap-x-5 lg:grid-cols-6 md:w-3/4 m-auto">
+        <div className="grid grid-cols-1 gap-y-6 p-3 md:grid-cols-4 md:gap-x-5 lg:grid-cols-6 md:w-11/12 lg:w-10/12  m-auto">
             {/* Filter Section */}
             <div className="md:col-span-1">
                 <Filter/>

@@ -7,17 +7,20 @@ export default function page() {
 
 
     return (
-        <div
-            className="flex md:flex-row flex-col justify-between w-11/12 md:w-4/5 m-auto pt-40 gap-5 md:gap-20 text-white">
-            <Suspense>
-                <Filter/>
-            </Suspense>
+
+        <div className="grid grid-cols-1 gap-y-6 p-3 md:grid-cols-4 md:gap-x-5 lg:grid-cols-6 md:w-11/12 lg:w-10/12 xl:w-3/4 m-auto">
+            {/* Filter Section */}
+            <div className="md:col-span-1">
+                <Suspense>
+                    <Filter/>
+                </Suspense>
+            </div>
 
             <div
-                className="flex flex-col justify-between rounded-xl bg-gray-800  w-full md:w-3/4 py-3 px-3 md:px-5">
+                className="md:col-span-3 lg:col-span-5 rounded-2xl bg-gray-800 py-3 px-3 md:px-5 h-fit">
                 <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 w-full">
                     <Suspense>
-                        <SearchPosts />
+                        <SearchPosts/>
                     </Suspense>
                 </div>
 

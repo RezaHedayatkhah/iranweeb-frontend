@@ -20,7 +20,7 @@ export default function SearchPosts() {
             });
             const data = await res.json();
             if (res.ok) {
-                setPosts(data);
+                setPosts(data.posts);
             } else {
                 console.log(data)
             }

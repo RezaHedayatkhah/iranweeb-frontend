@@ -50,7 +50,7 @@ export default function Filter() {
 
     return (
         <form
-            className="w-full h-fit flex flex-col gap-5 bg-gray-800 rounded-xl p-5"
+            className="w-full h-fit flex flex-col gap-5 bg-gray-800 rounded-xl p-2"
             id="filter"
             onSubmit={handleSubmit}
         >
