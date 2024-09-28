@@ -104,7 +104,7 @@ export default function Filter() {
 
             <button
                 type="submit"
-                className="w-fit text-white hover:bg-none bg-gradient-to-br from-pink-800 to-red-500 hover:border-2 border-pink-800 rounded-2xl px-5 py-1"
+                className="w-fit text-white hover:bg-red-600 bg-red-500 rounded-2xl px-5 py-1"
             >
                 فیلتر
             </button>

@@ -67,10 +67,10 @@ export async function generateMetadata({params}) {
             url: `${process.env.NEXT_PUBLIC_SITE_URL}/${params.contentType}/${params.slug}`,
             images: [
                 {
-                    url: `/images/${post.imageUrl}`,
-                    width: 1200,
-                    height: 630,
-                    alt: `${post.title} cover image`,
+                    url: `${process.env.NEXT_PUBLIC_IMAGES_URL}/${post?.imageUrl}`,
+                    width: 250,
+                    height: 384,
+                    alt: `${post.title} بنر `,
                 },
             ],
         },
@@ -78,7 +78,7 @@ export async function generateMetadata({params}) {
             card: 'summary_large_image',
             title: title,
             description: post.description,
-            images: [`/images/${post.imageUrl}`],
+            images: [`${process.env.NEXT_PUBLIC_IMAGES_URL}/${post?.imageUrl}`],
         },
     }
 }
