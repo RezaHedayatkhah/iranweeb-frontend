@@ -52,27 +52,77 @@ export default function RootLayout({children}) {
                 {children}
             </main>
 
-            <Link href="https://t.me/IranWeeb_ir"
-                  className="z-50 fixed w-fit h-fit cursor-pointer hover:text-blue-500 flex items-center justify-center mr-2 md:mr-5 md:mb-5 text-blue-400 bg-white rounded-full bottom-16 md:bottom-0 right-0">
-                <FontAwesomeIcon icon={faTelegram} className={"text-5xl"}/>
-            </Link>
 
             <footer
-                className="flex w-full bg-[#151f30] items-center justify-center h-44 md:h-32 mt-20">
-                <div className={"flex justify-between  items-center w-full px-5 md:px-0 md:w-9/12"}>
-                    <a referrerPolicy='origin' target='_blank'
-                       href='https://trustseal.enamad.ir/?id=528665&Code=wPw86Ztxuygks40orN77AIHRYS8ypr0P'><img
-                        referrerPolicy='origin'
-                        src='https://trustseal.enamad.ir/logo.aspx?id=528665&Code=wPw86Ztxuygks40orN77AIHRYS8ypr0P'
-                        alt=''
-                        style={{cursor: "pointer"}} code='wPw86Ztxuygks40orN77AIHRYS8ypr0P'/></a>
-                    <div className="footer-sec1">
-                        <p>
-                            کلیه حقوق این وبسایت محفوظ است
-                        </p>
+                className="flex flex-col w-full bg-[#151f30] items-center justify-center mt-20 md:py-10 gap-10">
+                <div
+                    className={"grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 items-center w-full  md:w-9/12 "}>
+                    <div className={"p-5 flex flex-col gap-5"}>
+                        <Link href={"/"}>
+                            <h1 className={"text-3xl md:text-4xl"}>
+                                <span>ایران</span>
+                                <span className={"text-red-500"}> ویب</span>
+                            </h1>
+                        </Link>
+                        <p className={"text-sm text-gray-300"}>مرجع مانگا، مانهوا و مانها با ترجمه فارسی</p>
+                        <div>
+                            <Link href="https://t.me/IranWeeb_ir"
+                                  className="w-fit h-fit hover:text-blue-500 flex items-center justify-center text-blue-400 bg-white rounded-full">
+                                <FontAwesomeIcon icon={faTelegram} className={"text-3xl"}/>
+                            </Link>
+                        </div>
                     </div>
-                    <a href="https://bitpay.ir/certificate-480482-iranweeb.ir" target="_blank"><img
-                        src="https://bitpay.ir/theme/public/images/trusted-logo.svg"/></a>
+                    <div className={"flex flex-col gap-4 p-5"}>
+                        <h6 className={"text-base"}>صفحات مهم</h6>
+                        <div className={"flex flex-col gap-2.5"}>
+                            <Link href={"/"}
+                                  className={"text-gray-300 text-sm hover:text-red-500 transition duration-300"}>درباره
+                                ما</Link>
+                            <Link href={"/"}
+                                  className={"text-gray-300 text-sm hover:text-red-500 transition duration-300"}>تماس با
+                                ما</Link>
+                            <Link href={"/"}
+                                  className={"text-gray-300 text-sm hover:text-red-500 transition duration-300"}>درخواست
+                                عضویت در تیم</Link>
+                            <Link href={"/register"}
+                                  className={"text-gray-300 text-sm hover:text-red-500 transition duration-300"}>ثبت
+                                نام</Link>
+                        </div>
+                    </div>
+                    <div className={"flex flex-col gap-4 p-5"}>
+                        <h6 className={"text-base"}>میانبر</h6>
+                        <div className={"flex flex-col gap-2.5"}>
+                            <Link href={"/manga"}
+                                  className={"text-gray-300 text-sm hover:text-red-500 transition duration-300"}>همه
+                                مانگا</Link>
+                            <Link href={"/manhwa"}
+                                  className={"text-gray-300 text-sm hover:text-red-500 transition duration-300"}>همه
+                                مانهوا</Link>
+                            <Link href={"/manhua"}
+                                  className={"text-gray-300 text-sm hover:text-red-500 transition duration-300"}>همه
+                                مانها</Link>
+                            <Link href={"/search"}
+                                  className={"text-gray-300 text-sm hover:text-red-500 transition duration-300"}>جست و
+                                جو</Link>
+                        </div>
+                    </div>
+                    <div className={"flex justify-between gap-10 p-5"}>
+                        <a href="https://bitpay.ir/certificate-480482-iranweeb.ir" target="_blank"><img
+                            src="https://bitpay.ir/theme/public/images/trusted-logo.svg"/></a>
+                        <a referrerPolicy='origin' target='_blank'
+                           href='https://trustseal.enamad.ir/?id=528665&Code=wPw86Ztxuygks40orN77AIHRYS8ypr0P'><img
+                            referrerPolicy='origin'
+                            src='https://trustseal.enamad.ir/logo.aspx?id=528665&Code=wPw86Ztxuygks40orN77AIHRYS8ypr0P'
+                            alt=''
+                            style={{cursor: "pointer"}} code='wPw86Ztxuygks40orN77AIHRYS8ypr0P'/></a>
+                    </div>
+
+                </div>
+
+                <div className="text-sm text-gray-300 w-full text-center pt-10 border-t border-red-500 border-opacity-10">
+                    <p>
+                        کلیه حقوق این وبسایت محفوظ است
+                    </p>
                 </div>
             </footer>
 

@@ -14,6 +14,7 @@ import {
     faLanguage, faNoteSticky
 } from "@fortawesome/free-solid-svg-icons";
 import NotFound from "next/dist/client/components/not-found-error";
+import Link from "next/link";
 
 const getPost = async (contentType, slug) => {
     try {
@@ -101,8 +102,8 @@ export default async function page({params}) {
                 <div className="flex flex-col gap-5 mt-10 md:mt-16 w-11/12 md:w-4/5 m-auto">
                     <div className="flex flex-wrap gap-3">
                         {post.genres.map((genre) => (
-                            <a key={genre.id} href=""
-                               className="w-fit border-red-500 border-2 rounded-full text-gray-300 px-2.5 py-0.5 text-sm hover:text-white hover:bg-red-500">{genre.name}</a>
+                            <Link key={genre.id} href={`/search?genres%5B%5D=${encodeURIComponent(genre.name)}`}
+                               className="w-fit border-red-500 border-2 rounded-full text-gray-300 px-2.5 py-0.5 text-sm hover:text-white hover:bg-red-500">{genre.name}</Link>
                         ))}
                     </div>
 

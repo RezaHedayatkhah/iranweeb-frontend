@@ -3,6 +3,7 @@ import {useEffect, useRef, useState} from "react";
 import PostCard from "@/app/_components/PostCard";
 import {Swiper, SwiperSlide} from 'swiper/react';
 import 'swiper/css';
+import Link from "next/link";
 
 export default function Hero() {
     const [posts, setPosts] = useState([]);
@@ -69,23 +70,20 @@ export default function Hero() {
                                     <div className="flex flex-col gap-3">
                                         <span className="text-gray-400">{post.title}</span>
                                         <h2 className="text-white text-3xl md:text-5xl lg:text-6xl">{post.originalName}</h2>
-                                        {/*<div className="text-pink-800 text-sm">*/}
-                                        {/*    @include('layouts.like', ['model' => $post])*/}
-                                        {/*</div>*/}
+
                                         <div className="flex gap-3">
                                             {post.genres?.slice(0, 4).map((genre) => (
-                                                <a key={genre.id} href=""
-                                                   className="border-red-500 border-2 rounded-full text-pink-800 px-2.5 py-0.5 text-sm hover:text-white hover:bg-red-500">
+                                                <Link key={genre.id} href={`/search?genres%5B%5D=${encodeURIComponent(genre.name)}`}
+                                                   className="border-red-500 border-2 rounded-full text-gray-300 px-2.5 py-0.5 text-sm hover:text-white hover:bg-red-500 transition duration-300">
                                                     {genre.name}
-                                                </a>
+                                                </Link>
                                             ))}
-
                                         </div>
                                         <p className="text-gray-300 line-clamp-2 md:line-clamp-3 md:w-1/2">
                                             {post.description}
                                         </p>
-                                        <a className="w-fit text-white bg-gradient-to-br from-pink-800 to-red-500 hover:border-2 border-pink-800 rounded-bl-2xl rounded-tr-2xl px-5 py-1"
-                                           href="">دانلود</a>
+                                        <Link className="w-fit text-white bg-red-500 hover:bg-red-600 rounded-bl-2xl rounded-tr-2xl px-5 py-1 transition duration-300"
+                                           href={`${process.env.NEXT_PUBLIC_SITE_URL}/${post.contentType.toLowerCase()}/${post.slug}`}>ادامه...</Link>
                                     </div>
                                     <div className="flex flex-col gap-2 h-full w-full">
                                         <h2 className="text-white border-b-2 border-red-500 w-fit mb-3 text-lg">پیشنهادی</h2>
