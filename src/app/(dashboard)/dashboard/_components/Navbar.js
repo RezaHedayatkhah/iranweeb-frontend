@@ -8,7 +8,7 @@ import {
     faEnvelope,
     faHouseChimneyUser, faPenToSquare, faReceipt, faRightFromBracket, faSquarePlus, faTags,
     faThumbsUp,
-    faUser
+    faUser, faUsers
 } from '@fortawesome/free-solid-svg-icons'
 
 
@@ -91,11 +91,17 @@ export default function Navbar({isActive}) {
                             <span>ژانر جدید</span>
                         </Link>
 
-                        {/*<Link href="/" className="flex gap-2">*/}
-                        {/*    <FontAwesomeIcon icon={faComments} className={"text-xl text-red-500"}/>*/}
+                        <Link href="/dashboard/comments/all" className="flex gap-2">
+                            <FontAwesomeIcon icon={faComments} className={"text-xl text-red-500"}/>
 
-                        {/*    <span>دیدگاه های کاربران</span>*/}
-                        {/*</Link>*/}
+                            <span>دیدگاه های کاربران</span>
+                        </Link>
+
+                        <Link href="/dashboard/users" className="flex gap-2">
+                            <FontAwesomeIcon icon={faUsers} className={"text-xl text-red-500"}/>
+
+                            <span>لیست کاربران</span>
+                        </Link>
 
                         {/*<Link href="/" className="flex gap-2">*/}
                         {/*    <FontAwesomeIcon icon={faEnvelope} className={"text-xl text-red-500"}/>*/}
