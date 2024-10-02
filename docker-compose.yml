@@ -14,7 +14,7 @@ services:
       BITPAY_API: ${BITPAY_API}
       BITPAY_REDIRECT: ${BITPAY_REDIRECT}
       BITPAY_PORTAL_URL: ${BITPAY_PORTAL_URL}
-    command: ["node", ".next/standalone/server.js"]
+    command: ["node", "standalone/server.js"]
     networks:
       - app-network
 
