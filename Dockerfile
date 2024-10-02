@@ -31,15 +31,9 @@ ENV NODE_ENV=production
 # Disable Next.js telemetry
 ENV NEXT_TELEMETRY_DISABLED=1
 
-# Automatically leverage output traces to reduce image size
-# https://nextjs.org/docs/advanced-features/output-file-tracing
-COPY .next/standalone ./
-COPY .next/static ./.next/static
-COPY public ./public
-
 # Expose port 3000
 EXPOSE 3000
 ENV PORT 3000
 
-# Start the Next.js app in standalone mode
-CMD ["node", "server.js"]
+# Start the Next.js app using the standalone output
+CMD ["node", ".next/standalone/server.js"]
