@@ -13,7 +13,4 @@ services:
       BITPAY_API: ${BITPAY_API}
       BITPAY_REDIRECT: ${BITPAY_REDIRECT}
       BITPAY_PORTAL_URL: ${BITPAY_PORTAL_URL}
-    volumes:
-      - .:/app                 # Mounts the current directory to /app in the container
-      - /app/node_modules
     command: npm run stand
