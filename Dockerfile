@@ -23,4 +23,4 @@ ENV NODE_ENV=production
 EXPOSE 3000
 
 # Start the Next.js server in standalone mode
-CMD ["npm", "stand"]
+CMD ["node", ".next/standalone/server.js"]
