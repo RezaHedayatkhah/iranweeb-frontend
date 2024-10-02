@@ -24,6 +24,7 @@
     "react-dom": "^18",
     "react-hot-toast": "^2.4.1",
     "react-select": "^5.8.0",
+    "sharp": "^0.33.5",
     "swiper": "^11.1.11"
   },
   "devDependencies": {

@@ -1,5 +1,5 @@
 export default async function sitemap() {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/posts`,{
+    const res = await fetch(`https://api.iranweeb.ir/api/posts`,{
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',

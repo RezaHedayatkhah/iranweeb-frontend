@@ -1,5 +1,5 @@
 {
-    "platform": "next",
-    "app": "iranweeb2"
+    "platform": "docker",
+    "app": "iranweebfront"
 
 }
