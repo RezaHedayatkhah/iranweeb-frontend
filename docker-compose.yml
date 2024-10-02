@@ -14,10 +14,4 @@ services:
       BITPAY_API: ${BITPAY_API}
       BITPAY_REDIRECT: ${BITPAY_REDIRECT}
       BITPAY_PORTAL_URL: ${BITPAY_PORTAL_URL}
-    command: ["node", "standalone/server.js"]
-    networks:
-      - app-network
-
-networks:
-  app-network:
-    driver: bridge
+    command: ["node", "server.js"]

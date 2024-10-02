@@ -1,40 +1,66 @@
-# Use official Node.js runtime as a base image
 FROM node:20-alpine AS base
 
-# Set working directory
-WORKDIR /app
 
-# Install dependencies only when needed
+
+### Dependencies ###
 FROM base AS deps
-RUN apk add --no-cache libc6-compat
+RUN apk add --no-cache libc6-compat git
 
-# Copy package.json and package-lock.json
-COPY package.json package-lock.json ./
 
-# Install dependencies
-RUN npm ci
 
-# Copy the rest of the application code
-COPY . .
+# Setup pnpm environment
+ENV PNPM_HOME="/pnpm"
+ENV PATH="$PNPM_HOME:$PATH"
+RUN corepack enable
+RUN corepack prepare pnpm@latest --activate
 
-# Build the Next.js application in standalone mode
-RUN npm run build
-
-# Production image, copy all the files and run Next.js
-FROM node:20-alpine AS runner
 WORKDIR /app
 
-# Set environment to production
-ENV NODE_ENV=production
-ENV NEXT_TELEMETRY_DISABLED=1
+COPY package.json pnpm-lock.yaml ./
+RUN pnpm install --frozen-lockfile --prefer-frozen-lockfile
 
-# Copy necessary files from the builder stage
-COPY --from=deps /app/public ./public
-COPY --from=deps /app/.next/standalone ./standalone
-COPY --from=deps /app/.next/static ./.next/static
+# Builder
+FROM base AS builder
 
-# Expose port 3000
+RUN corepack enable
+RUN corepack prepare pnpm@latest --activate
+
+WORKDIR /app
+
+COPY --from=deps /app/node_modules ./node_modules
+COPY . .
+RUN pnpm build
+
+
+### Production image runner ###
+FROM base AS runner
+
+# Set NODE_ENV to production
+ENV NODE_ENV production
+
+# Disable Next.js telemetry
+# Learn more here: https://nextjs.org/telemetry
+ENV NEXT_TELEMETRY_DISABLED 1
+
+# Set correct permissions for nextjs user and don't run as root
+RUN addgroup nodejs
+RUN adduser -SDH nextjs
+RUN mkdir .next
+RUN chown nextjs:nodejs .next
+
+# Automatically leverage output traces to reduce image size
+# https://nextjs.org/docs/advanced-features/output-file-tracing
+COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
+COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
+COPY --from=builder --chown=nextjs:nodejs /app/public ./public
+
+USER nextjs
+
+# Exposed port (for orchestrators and dynamic reverse proxies)
 EXPOSE 3000
+ENV PORT 3000
+ENV HOSTNAME "0.0.0.0"
+HEALTHCHECK --interval=30s --timeout=30s --start-period=5s --retries=3 CMD [ "wget", "-q0", "http://localhost:3000/health" ]
 
-# Start the Next.js server in standalone mode
-CMD ["node", "standalone/server.js"]
+# Run the nextjs app
+CMD ["node", "server.js"]
