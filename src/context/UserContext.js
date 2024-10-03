@@ -2,7 +2,6 @@
 
 import {createContext, useContext, useEffect, useState} from 'react';
 import {useRouter} from 'next/navigation';
-import axios from "axios";
 import checkAuthorizationCookie from "@/context/getCookie";
 
 const UserContext = createContext({});
@@ -14,12 +13,13 @@ export function UserProvider({children}) {
     const getUserData = async () => {
         if (!user && await checkAuthorizationCookie()) { // Only fetch user data if Authorization cookie exists
             try {
-                const res = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/user`, {
-                    withCredentials: true, // Include cookies in the request
+                const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/user`, {
+                    method: "GET",
+                    credentials: 'include', // Include cookies in the request
                 });
-
-                if (res.status === 200) {
-                    setUser(res.data.user); // Set the user data if the response is successful
+                const data = await res.json();
+                if (res.ok) {
+                    setUser(data.user); // Set the user data if the response is successful
                 }
             } catch (error) {
                 await logout();

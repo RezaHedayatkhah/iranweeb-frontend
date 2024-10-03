@@ -1,9 +1,6 @@
 "use client"
-import Image from "next/image";
-import Link from "next/link";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faLink} from "@fortawesome/free-solid-svg-icons";
 import {useEffect, useState} from "react";
+import formatDate from "@/app/_components/formatDate";
 
 export default function page() {
     const [transactions, setTransactions] = useState([]);
@@ -66,19 +63,19 @@ export default function page() {
                                 </td>
 
                                 <td className="p-5 text-sm">
-                                    <p className="line-clamp-1">{transaction.amount}</p>
+                                    <p className="line-clamp-1">{transaction.amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} ریال</p>
                                 </td>
                                 <td className="p-5 text-sm">
-                                    <p className="line-clamp-1">{transaction.type}</p>
+                                    <p className="line-clamp-1">{transaction.type === 'CREDIT' ? 'شارژ حساب' : 'خرید'}</p>
                                 </td>
                                 <td className="p-5 text-sm">
-                                    <p className="line-clamp-1">{transaction.status}</p>
+                                    <p className="line-clamp-1 text-green-500">{transaction.status === 'SUCCESS' ? 'موفق' : transaction.status}</p>
                                 </td>
                                 <td className="p-5 text-sm">
                                     <p className="line-clamp-1">{transaction.description}</p>
                                 </td>
                                 <td className="p-5 text-sm">
-                                    <span>{transaction.createdAt}</span>
+                                    <span>{formatDate(transaction.createdAt)}</span>
                                 </td>
                             </tr>
                         ))}

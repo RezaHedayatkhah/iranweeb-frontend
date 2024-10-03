@@ -63,14 +63,19 @@ export default function POST() {
                 </div>
 
                 <input
-                    type="number"
+                    type="text"
                     value={amount}
-                    onChange={(e) => setAmount(Number(e.target.value))}
+                    onChange={(e) => {
+                        const value = e.target.value;
+                        // Remove any non-digit characters
+                        const integerValue = value.replace(/\D/g, '');
+                        setAmount(integerValue);
+                    }}
                     className="w-full text-white bg-[#151f30] focus:outline-none border-2 border-red-500 rounded-2xl px-5 h-11 mt-4"
                 />
 
                 <p className="text-center">مبلغ پرداخت:</p>
-                <p className="text-center text-lg">{amount.toLocaleString()} تومان</p>
+                <p className="text-center text-lg">{amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} تومان</p>
 
                 <div className="flex gap-3 w-full mt-4">
                     <button

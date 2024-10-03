@@ -120,7 +120,7 @@ export default function page() {
             <div className="flex flex-row gap-4 w-full bg-[#151f30] rounded-2xl p-5 mb-7">
                 <Image src="https://flixtv.volkovdesign.com/admin/img/user.svg" width={40} height={40} alt={"profilePicture"} className="rounded-xl p-1"/>
                 <div className="flex flex-col">
-                    <span className="text-gray-500 text-sm">{user?.role}</span>
+                    <span className="text-gray-500 text-sm">{user?.role === 'ADMIN' ? 'ادمین' : 'کاربر عادی'}</span>
                     <span className="text-lg">{user?.userName}</span>
                 </div>
             </div>

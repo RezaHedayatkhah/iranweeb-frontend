@@ -20,7 +20,7 @@ export default function Modal({ isOpen, onClose, children }) {
             {isOpen && (
                 <div className={`fixed inset-0 bg-black bg-opacity-50 z-50 flex justify-center items-center 
                     transition-opacity duration-300 ${showModal ? "opacity-100" : "opacity-0"}`}
-                     onClick={onClose}>
+                     >
                     <div
                         className={`bg-[#151f30] rounded-2xl shadow-lg max-w-lg w-full px-5 pt-8 pb-5 transform transition-transform 
                         duration-300 ${showModal ? "translate-y-0" : "-translate-y-10"}`}
