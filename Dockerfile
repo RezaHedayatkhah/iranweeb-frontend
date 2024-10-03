@@ -39,6 +39,13 @@ FROM base AS runner
 WORKDIR /app
 
 ENV NODE_ENV=production
+ENV NEXT_PUBLIC_API_URL=https://api.iranweeb.ir
+ENV JWT_SECRET=mysecretkey123
+ENV NEXT_PUBLIC_SITE_URL=https://iranweeb.ir
+ENV NEXT_PUBLIC_IMAGES_URL=https://iranweeb.storage.iran.liara.space/images
+ENV BITPAY_API=86e07-cf604-d131c-c33c5-f079408ba2f25afe40cdc6528c8c
+ENV BITPAY_REDIRECT=https://iranweeb.ir/verify
+ENV BITPAY_PORTAL_URL=https://bitpay.ir/payment
 
 # Uncomment the following line in case you want to disable telemetry during runtime.
 # ENV NEXT_TELEMETRY_DISABLED=1
