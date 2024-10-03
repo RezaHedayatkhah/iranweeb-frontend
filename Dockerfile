@@ -26,14 +26,6 @@ COPY . .
 # Learn more here: https://nextjs.org/telemetry
 # Uncomment the following line in case you want to disable telemetry during the build.
 ENV NEXT_TELEMETRY_DISABLED=1
-ENV NODE_ENV=production
-ENV NEXT_PUBLIC_API_URL=$NEXT_PUBLIC_API_URL
-ENV JWT_SECRET=$JWT_SECRET
-ENV NEXT_PUBLIC_SITE_URL=$NEXT_PUBLIC_SITE_URL
-ENV NEXT_PUBLIC_IMAGES_URL=$NEXT_PUBLIC_IMAGES_URL
-ENV BITPAY_API=$BITPAY_API
-ENV BITPAY_REDIRECT=$BITPAY_REDIRECT
-ENV BITPAY_PORTAL_URL=$BITPAY_PORTAL_URL
 
 RUN \
   if [ -f yarn.lock ]; then yarn run build; \
