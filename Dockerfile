@@ -50,9 +50,6 @@ COPY --from=builder /app/public ./public
 
 # Set the correct permission for prerender cache
 RUN mkdir .next
-RUN mkdir .next/cache
-RUN mkdir .next/cache/images
-RUN mkdir .next/cache/fetch-cach
 RUN chown nextjs:nodejs .next
 
 # Automatically leverage output traces to reduce image size
