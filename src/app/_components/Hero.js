@@ -4,10 +4,12 @@ import PostCard from "@/app/_components/PostCard";
 import {Swiper, SwiperSlide} from 'swiper/react';
 import 'swiper/css';
 import Link from "next/link";
+import Image from "next/image";
 
 export default function Hero() {
     const [posts, setPosts] = useState([]);
     const slideShowRef = useRef();
+    const [isMobile, setIsMobile] = useState(false);
 
 
     useEffect(() => {
@@ -55,21 +57,40 @@ export default function Hero() {
         if (posts.length > 0) {
             initSlideShow();
         }
+        // Check the window width to determine if it's mobile
+        const handleResize = () => {
+            setIsMobile(window.innerWidth <= 768);
+        };
+
+        // Set initial state on load
+        handleResize();
+
+        // Update state on window resize
+        window.addEventListener('resize', handleResize);
+
+        // Cleanup listener on component unmount
+        return () => window.removeEventListener('resize', handleResize);
     }, [posts]);
 
 
     return (
         <div ref={slideShowRef}>
             {posts.map((post) => (
-                    <div key={post.id} className="mySlides w-full bg-no-repeat bg-cover bg-center"
-                         style={{backgroundImage: `url(${process.env.NEXT_PUBLIC_IMAGES_URL}/${post?.backgroundImageUrl})`}}>
-                        <div className="bg-gradient-to-t from-gray-950 from-5%">
+                    <div key={post.id} className="mySlides w-full h-screen bg-gradient-to-t from-[#131720] from-10% to-[#131720]/40">
+                        <Image
+                            src={`${process.env.NEXT_PUBLIC_IMAGES_URL}/${isMobile ? post?.imageUrl : post?.backgroundImageUrl}`}
+                            alt={post.originalName}
+                            fill
+                            className="-z-10 mt-24 md:mt-10"
+                            priority={true}
+                        />
+                        <div className="absolute inset-0">
                             <div
-                                className="bg-gradient-to-tl from-[#131720] from-20% to-pink-800/10 w-full h-full pt-40 flex flex-col">
+                                className=" w-full h-full pt-40 flex flex-col">
                                 <div className="w-11/12 md:w-4/5 m-auto h-full flex flex-col gap-10">
                                     <div className="flex flex-col gap-3">
                                         <span className="text-gray-400">{post.title}</span>
-                                        <h2 className="text-white text-3xl md:text-5xl lg:text-6xl">{post.originalName}</h2>
+                                        <h2 className="text-white text-3xl md:text-5xl lg:text-6xl">{post.originalTitle}</h2>
 
                                         <div className="flex gap-3">
                                             {post.genres?.slice(0, 4).map((genre) => (
