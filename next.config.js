@@ -5,7 +5,7 @@ const nextConfig = {
         remotePatterns: [
             {
                 protocol: 'https',
-                hostname: 'iranweeb.storage.iran.liara.space',
+                hostname: 'images.iranweeb.ir',
                 port: '',
                 pathname: '/**',
             },
