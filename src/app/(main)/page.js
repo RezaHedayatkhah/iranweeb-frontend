@@ -13,6 +13,7 @@ export default function Home() {
     useEffect(() => {
         const params = new URLSearchParams({
             'sortBy': 'date',
+            'sortOrder': 'desc',
             'pageSize': '10',
         });
         // Fetch latest posts
@@ -37,6 +38,7 @@ export default function Home() {
         const fetchMostViewedPosts = async () => {
             const params = new URLSearchParams({
                 'sortBy': 'viewCount',
+                'sortOrder': 'desc',
                 'pageSize': '24',
             });
             try {

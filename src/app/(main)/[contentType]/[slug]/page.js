@@ -20,7 +20,7 @@ const getPost = async (contentType, slug) => {
     try {
         const url = `${process.env.NEXT_PUBLIC_API_URL}/api/posts/single/${contentType.toUpperCase()}/${slug}`;
         const res = await fetch(url, {
-            next: { tags: ['posts'] },
+            next: { tags: ['posts'], revalidate: 3600 },
             headers: {
                 "Content-Type": "application/json",
                 "Accept": "application/json",
