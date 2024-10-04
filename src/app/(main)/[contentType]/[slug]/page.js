@@ -15,15 +15,20 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import NotFound from "next/dist/client/components/not-found-error";
 import Link from "next/link";
+import { headers } from "next/headers";
 
 const getPost = async (contentType, slug) => {
+    const headersList = headers(); // Get the headers
+    const ip = headersList.get("x-forwarded-for") || headersList.get("x-real-ip") || "121.0.0.1"; // Fallback IP
+
     try {
         const url = `${process.env.NEXT_PUBLIC_API_URL}/api/posts/single/${contentType.toUpperCase()}/${slug}`;
         const res = await fetch(url, {
-            next: { tags: ['posts'], revalidate: 3600 },
+            next: { tags: ['posts'], revalidate: 3 },
             headers: {
                 "Content-Type": "application/json",
                 "Accept": "application/json",
+                "X-Client-IP": ip, // Send the IP address in a custom header
             },
         });
 
