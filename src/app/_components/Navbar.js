@@ -13,7 +13,7 @@ export default function Navbar() {
         setActive(!isActive)
     }
     return (
-        <header className="bg-[#131720] p-4 border-b border-[#151f30]">
+        <header className="bg-[#131720] p-4 border-b border-[#151f30] z-20">
             <div className="container mx-auto flex justify-between items-center">
                 <button className="md:hidden text-gray-500 focus:outline-none" onClick={handleClick}>
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24"
