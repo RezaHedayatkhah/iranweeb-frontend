@@ -19,7 +19,12 @@ import { headers } from "next/headers";
 
 const getPost = async (contentType, slug) => {
     const headersList = headers(); // Get the headers
-    const ip = headersList.get("x-forwarded-for") || headersList.get("x-real-ip") || "121.0.0.1"; // Fallback IP
+    let ip = headersList.get("x-forwarded-for") || headersList.get("x-real-ip") || "127.0.0.1"; // Fallback to localhost in dev
+
+    // x-forwarded-for may return multiple IPs (if there are multiple proxies), take the first IP
+    if (ip.includes(',')) {
+        ip = ip.split(',')[0].trim();
+    }
 
     try {
         const url = `${process.env.NEXT_PUBLIC_API_URL}/api/posts/single/${contentType.toUpperCase()}/${slug}`;
