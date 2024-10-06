@@ -4,8 +4,9 @@ import {UserProvider} from "@/context/UserContext";
 import {Toaster} from 'react-hot-toast';
 import Navbar from "@/app/_components/Navbar";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faTelegram} from "@fortawesome/free-brands-svg-icons";
+import {faInstagram, faTelegram} from "@fortawesome/free-brands-svg-icons";
 import Script from "next/script";
+import Image from "next/image";
 
 export const metadata = {
     keywords: ['ایران ویب', 'Iranweeb', 'Iran Weeb', 'دانلود مانگا', 'دانلود مانهوا', 'دانلود مانها', 'مانگا با ترجمه فارسی', 'مانهوا با ترجمه فارسی', 'مانها با ترجمه فارسی', 'وبسایت دانلود مانگا', 'وبسایت دانلود مانهوا', 'وبسایت دانلود مانها'],
@@ -64,21 +65,25 @@ export default function RootLayout({children}) {
                                 <span className={"text-red-500"}> ویب</span>
                             </h1>
                         </Link>
-                        <p className={"text-sm text-gray-300"}>مرجع مانگا، مانهوا و مانها با ترجمه فارسی</p>
-                        <div>
-                            <Link href="https://t.me/IranWeeb_ir"
-                                  className="w-fit h-fit hover:text-blue-500 flex items-center justify-center text-blue-400 bg-white rounded-full">
-                                <FontAwesomeIcon icon={faTelegram} className={"text-3xl"}/>
+                        <p className={"text-sm text-gray-300 text-justify"}>ایران‌ویب یکی از بزرگ‌ترین منابع فارسی برای مانهوا، مانها و مانگا با ترجمه فارسی است. ما با ارائه جدیدترین و محبوب‌ترین عناوین و ترجمه‌های باکیفیت، همواره در تلاشیم تا تجربه‌ای لذت‌بخش و متفاوت را برای علاقه‌مندان این دنیای جذاب فراهم کنیم.</p>
+                        <div className={"flex gap-3"}>
+                            <Link href="https://t.me/iranweeb_official"
+                                  className="w-fit h-fit hover:text-blue-500 flex items-center justify-center text-blue-400 hover:scale-125 transition duration-150">
+                                <Image src={'/telegram.png'} alt={"telegram icon"} width={32} height={32} />
+                            </Link>
+                            <Link href="https://t.me/iranweeb_official"
+                                  className="w-fit h-fit hover:text-blue-500 flex items-center justify-center text-blue-400 hover:scale-125 transition duration-150">
+                                <Image src={'/instagram.png'} alt={"telegram icon"} width={32} height={32} />
                             </Link>
                         </div>
                     </div>
                     <div className={"flex flex-col gap-4 p-5"}>
                         <h6 className={"text-base"}>صفحات مهم</h6>
                         <div className={"flex flex-col gap-2.5"}>
-                            <Link href={"/"}
+                            <Link href={"/about"}
                                   className={"text-gray-300 text-sm hover:text-red-500 transition duration-300"}>درباره
                                 ما</Link>
-                            <Link href={"/"}
+                            <Link href={"/contact-us"}
                                   className={"text-gray-300 text-sm hover:text-red-500 transition duration-300"}>تماس با
                                 ما</Link>
                             <Link href={"/"}

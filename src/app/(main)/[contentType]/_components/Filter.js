@@ -89,15 +89,14 @@ export default function Filter() {
                     <select
                         id="sortBy"
                         name="sortBy"
-                        defaultValue={searchParams.get('sortBy') || 'date'} // Default to 'date' if no sort order specified
+                        defaultValue={searchParams.get('sortBy') || 'newest'} // Default to 'date' if no sort order specified
                         className="bg-gray-900 focus:outline-none focus:border-2 focus:border-red-500 rounded-lg px-2 py-1"
                     >
-                        <option value="date">
-                            جدیدترین ها
-                        </option>
-                        <option value="viewCount">بیشترین بازدیدها</option>
-                        <option value="updated_at">بروز شده</option>
+                        <option value="newest">جدیدترین ها</option>
+                        <option value="most_viewed">بیشترین بازدیدها</option>
+                        {/*<option value="updated_at">بروز شده</option>*/}
                         <option value="most_liked">محبوب ترین</option>
+
                     </select>
                 </div>
             </div>

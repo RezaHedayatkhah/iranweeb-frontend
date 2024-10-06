@@ -1,32 +1,35 @@
-"use client"
-import {useEffect, useRef, useState} from "react";
+"use client";
+import { useEffect, useRef, useState } from "react";
 import PostCard from "@/app/_components/PostCard";
-import {Swiper, SwiperSlide} from 'swiper/react';
-import 'swiper/css';
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
 import Link from "next/link";
 import Image from "next/image";
+import SkeletonHero from "@/app/_components/SkeletonHero";
 
 export default function Hero() {
     const [posts, setPosts] = useState([]);
     const slideShowRef = useRef();
     const [isMobile, setIsMobile] = useState(false);
-
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const fetchPosts = async () => {
             try {
                 const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/hero-posts`, {
-                    method: 'GET',
+                    method: "GET",
                     headers: {
-                        Accept: 'application/json',
+                        Accept: "application/json",
                     },
                 });
                 const data = await res.json();
+
                 if (res.ok) {
                     setPosts(data);
+                    setLoading(false);
                 }
             } catch (error) {
-                console.error('Error fetching hero posts:', error);
+                console.error("Error fetching hero posts:", error);
             }
         };
 
@@ -53,49 +56,57 @@ export default function Hero() {
             }
         };
 
-        // Only run initSlideShow if posts are loaded
         if (posts.length > 0) {
             initSlideShow();
         }
-        // Check the window width to determine if it's mobile
+
         const handleResize = () => {
             setIsMobile(window.innerWidth <= 768);
         };
 
-        // Set initial state on load
         handleResize();
+        window.addEventListener("resize", handleResize);
 
-        // Update state on window resize
-        window.addEventListener('resize', handleResize);
-
-        // Cleanup listener on component unmount
-        return () => window.removeEventListener('resize', handleResize);
+        return () => window.removeEventListener("resize", handleResize);
     }, [posts]);
+
 
 
     return (
         <div ref={slideShowRef}>
-            {posts.map((post) => (
-                    <div key={post.id} className="mySlides w-full h-screen bg-gradient-to-t from-[#131720] from-10% to-[#131720]/40">
+            {loading ? (
+                <SkeletonHero />
+            ) : (
+                posts.map((post) => (
+                    <div
+                        key={post.id}
+                        className="mySlides w-full h-screen bg-gradient-to-t from-[#131720] from-10% to-[#131720]/40"
+                    >
                         <Image
                             src={`${process.env.NEXT_PUBLIC_IMAGES_URL}/${isMobile ? post?.imageUrl : post?.backgroundImageUrl}`}
                             alt={post.originalName}
+                            quality={100}
                             fill
-                            className="-z-10 mt-24 md:mt-10"
+                            sizes="100vw"
+                            style={{ objectFit: "cover" }}
+                            className="-z-10 mt-24 md:mt-10 w-full h-screen"
                             priority={true}
+                            placeholder={"blur"}
+                            blurDataURL={"iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mM0V1OrBwACIwEEp+JEOQAAAABJRU5ErkJggg=="}
                         />
                         <div className="absolute inset-0">
-                            <div
-                                className=" w-full h-full pt-40 flex flex-col">
+                            <div className="w-full h-full pt-40 flex flex-col">
                                 <div className="w-11/12 md:w-4/5 m-auto h-full flex flex-col gap-10">
                                     <div className="flex flex-col gap-3">
                                         <span className="text-gray-400">{post.title}</span>
                                         <h2 className="text-white text-3xl md:text-5xl lg:text-6xl">{post.originalTitle}</h2>
-
                                         <div className="flex gap-3">
                                             {post.genres?.slice(0, 4).map((genre) => (
-                                                <Link key={genre.id} href={`/search?genres%5B%5D=${encodeURIComponent(genre.name)}`}
-                                                   className="border-red-500 border-2 rounded-full text-gray-300 px-2.5 py-0.5 text-sm hover:text-white hover:bg-red-500 transition duration-300">
+                                                <Link
+                                                    key={genre.id}
+                                                    href={`/search?genres%5B%5D=${encodeURIComponent(genre.name)}`}
+                                                    className="border-red-500 border-2 rounded-full text-gray-300 px-2.5 py-0.5 text-sm hover:text-white hover:bg-red-500 transition duration-300"
+                                                >
                                                     {genre.name}
                                                 </Link>
                                             ))}
@@ -103,60 +114,42 @@ export default function Hero() {
                                         <p className="text-gray-300 line-clamp-2 md:line-clamp-3 md:w-1/2">
                                             {post.description}
                                         </p>
-                                        <Link className="w-fit text-white bg-red-500 hover:bg-red-600 rounded-bl-2xl rounded-tr-2xl px-5 py-1 transition duration-300"
-                                           href={`${process.env.NEXT_PUBLIC_SITE_URL}/${post.contentType.toLowerCase()}/${post.slug}`}>ادامه...</Link>
+                                        <Link
+                                            className="w-fit text-white bg-red-500 hover:bg-red-600 rounded-bl-2xl rounded-tr-2xl px-5 py-1 transition duration-300"
+                                            href={`${process.env.NEXT_PUBLIC_SITE_URL}/${post.contentType.toLowerCase()}/${post.slug}`}
+                                        >
+                                            ادامه...
+                                        </Link>
                                     </div>
                                     <div className="flex flex-col gap-2 h-full w-full">
                                         <h2 className="text-white border-b-2 border-red-500 w-fit mb-3 text-lg">پیشنهادی</h2>
-                                        {/*Swiper*/}
-                                        <div className=" w-full">
+                                        <div className="w-full">
                                             <Swiper
                                                 spaceBetween={50}
                                                 height={384}
                                                 slidesPerView={"auto"}
-                                                breakpoints={
-                                                    {
-                                                        320: {
-                                                            slidesPerView: 2,
-                                                            spaceBetween: 20
-                                                        },
-                                                        480: {
-                                                            slidesPerView: 3,
-                                                            spaceBetween: 30
-                                                        },
-                                                        800: {
-                                                            slidesPerView: 4,
-                                                            spaceBetween: 40
-                                                        },
-                                                        1400: {
-                                                            slidesPerView: 5,
-                                                            spaceBetween: 40
-                                                        },
-                                                        1700: {
-                                                            slidesPerView: 6,
-                                                            spaceBetween: 40
-                                                        }
-                                                    }
-                                                }
+                                                breakpoints={{
+                                                    320: { slidesPerView: 2, spaceBetween: 20 },
+                                                    480: { slidesPerView: 3, spaceBetween: 30 },
+                                                    800: { slidesPerView: 4, spaceBetween: 40 },
+                                                    1400: { slidesPerView: 5, spaceBetween: 40 },
+                                                    1700: { slidesPerView: 6, spaceBetween: 40 },
+                                                }}
                                             >
                                                 {posts.map((post) => (
-
                                                     <SwiperSlide key={post.id}>
-                                                        <PostCard post={post}/>
+                                                        <PostCard post={post} />
                                                     </SwiperSlide>
                                                 ))}
-
                                             </Swiper>
-
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                )
-            )
-            }
+                ))
+            )}
         </div>
-    )
+    );
 }

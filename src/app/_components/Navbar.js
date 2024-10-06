@@ -3,6 +3,8 @@ import Link from "next/link";
 import {useUser} from "@/context/UserContext";
 import {Suspense, useState} from "react";
 import Search from "@/app/_components/Search";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faHouseChimneyUser, faRightToBracket} from "@fortawesome/free-solid-svg-icons";
 
 export default function Navbar() {
     const {user} = useUser()
@@ -36,18 +38,24 @@ export default function Navbar() {
                           className="hover:text-red-500">مانها</Link>
                 </nav>
 
-                <div className="flex items-center gap-2 md:w-1/3">
+                <div className="flex items-center gap-5 md:w-1/3">
                     <div
                         className={`items-center justify-between bg-[#151f30] rounded-full text-gray-400 px-3 w-full md:flex hidden`}>
                         <Suspense>
                             <Search />
                         </Suspense>
                     </div>
-                    {user ? (<Link href="/dashboard" className="hover:text-red-500"
-                                   aria-label="Dashboard">داشبورد</Link>) : (
-                        <Link href="/login" className="hover:text-red-500" aria-label="Login">ورود</Link>
+                    {user ? (
+                            <Link href="/dashboard" className="hover:text-red-500 flex justify-center items-center gap-3 transition duration-300" aria-label="Dashboard">
+                                <span>داشبورد</span>
+                                <FontAwesomeIcon icon={faHouseChimneyUser} className={"text-lg text-red-500"} />
+                            </Link>
+                        ) : (
+                           <Link href="/login" className="hover:text-red-500 flex justify-center items-center gap-3 transition duration-300" aria-label="Login">
+                               <span>ورود</span>
+                               <FontAwesomeIcon icon={faRightToBracket} className={"text-lg text-red-500"} />
+                           </Link>
                     )}
-                    <i className="fa-solid fa-right-to-bracket text-red-500"></i>
                 </div>
             </div>
             <div className={`md:hidden ${!isActive && 'hidden'}`} id="mobile-menu">
