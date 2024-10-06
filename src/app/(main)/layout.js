@@ -113,12 +113,13 @@ export default function RootLayout({children}) {
                     </div>
                     <div className={"flex justify-between gap-10 p-5"}>
                         <a href="https://bitpay.ir/certificate-480482-iranweeb.ir" target="_blank"><img
+                            alt='bitpay logo'
                             src="https://bitpay.ir/theme/public/images/trusted-logo.svg"/></a>
                         <a referrerPolicy='origin' target='_blank'
                            href='https://trustseal.enamad.ir/?id=528665&Code=wPw86Ztxuygks40orN77AIHRYS8ypr0P'><img
                             referrerPolicy='origin'
                             src='https://trustseal.enamad.ir/logo.aspx?id=528665&Code=wPw86Ztxuygks40orN77AIHRYS8ypr0P'
-                            alt=''
+                            alt='enamad logo'
                             style={{cursor: "pointer"}} code='wPw86Ztxuygks40orN77AIHRYS8ypr0P'/></a>
                     </div>
 

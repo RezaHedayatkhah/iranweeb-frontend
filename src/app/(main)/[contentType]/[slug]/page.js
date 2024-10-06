@@ -120,7 +120,7 @@ export default async function page({params}) {
                     <div className="flex flex-col md:flex-row gap-5 md:gap-0 text-white">
                         <div className="m-auto md:w-1/5 w-10/12">
                             <Image className="rounded-lg w-full md:w-4/5 h-96" src={`${process.env.NEXT_PUBLIC_IMAGES_URL}/${post?.imageUrl}`} priority={true}
-                                   alt={post.originalTitle} width="0" height="0" sizes="100vw"/>
+                                   alt={post.title} width="0" height="0" sizes="100vw"/>
                         </div>
                         <div className="flex flex-col gap-5 md:w-4/5 w-full">
                             <div className="flex gap-5 justify-between">

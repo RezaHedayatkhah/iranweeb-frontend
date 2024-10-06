@@ -84,7 +84,7 @@ export default function Hero() {
                     >
                         <Image
                             src={`${process.env.NEXT_PUBLIC_IMAGES_URL}/${isMobile ? post?.imageUrl : post?.backgroundImageUrl}`}
-                            alt={post.originalName}
+                            alt={post.title}
                             quality={100}
                             fill
                             sizes="100vw"
