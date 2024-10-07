@@ -5,7 +5,7 @@ const nextConfig = {
         remotePatterns: [
             {
                 protocol: 'https',
-                hostname: 'images.iranweeb.ir',
+                hostname: 'images.animeweeb.ir',
                 port: '',
                 pathname: '/**',
             },
