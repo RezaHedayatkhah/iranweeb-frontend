@@ -48,6 +48,9 @@ COPY --from=builder /app/public ./public
 # Set the correct permission for prerender cache
 RUN mkdir .next
 
+# Enable caching by copying the .next/cache directory from the builder stage
+COPY --from=builder /app/.next/cache ./.next/cache
+
 # Automatically leverage output traces to reduce image size
 # https://nextjs.org/docs/advanced-features/output-file-tracing
 COPY --from=builder /app/.next/standalone ./
