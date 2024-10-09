@@ -130,7 +130,7 @@ export default async function page({params}) {
                                 alt={`${post.title}`}
                                 width={250}   // Set intrinsic width and height
                                 height={350}
-                                priority={false}
+                                priority={true}
                                 sizes="(max-width: 768px) 50vw, (min-width: 769px) 20vw, (min-width: 1024px) 15vw"
                             />
                         </div>
