@@ -10,6 +10,7 @@ const nextConfig = {
                 pathname: '/**',
             },
         ],
+        minimumCacheTTL: 3600, // Apply the minimum cache TTL globally for images
     },
 };
 
