@@ -33,18 +33,23 @@ export default function Search() {
     };
 
     return (
-            <form className="w-full flex justify-between items-center bg-[#151f30] rounded-full text-gray-400 " name="search" method="get" onSubmit={handleSubmit}>
-                <input
-                    type="text"
-                    className="w-full rounded-full focus:outline-none bg-[#151f30] h-7 px-3"
-                    name="query"
-                    placeholder="جستجو..."
-                    onChange={(e) => handleSearch(e.target.value)}  // Update query as user types
-                    defaultValue={searchParams.get('query') || ''}   // Keep the query in the input
-                />
-                <button type="submit">
-                    <FontAwesomeIcon icon={faSearch} className="hover:text-red-500 h-4 flex items-center" />
-                </button>
-            </form>
+        <form className="w-full flex justify-between items-center bg-[#151f30] rounded-full text-gray-400" name="search"
+              method="get" onSubmit={handleSubmit}>
+            <label htmlFor="search-input" className="sr-only">جستجو</label> {/* Screen reader label */}
+            <input
+                type="text"
+                id="search-input"
+                className="w-full rounded-full focus:outline-none bg-[#151f30] h-7 px-3"
+                name="query"
+                placeholder="جستجو..."
+                aria-label="جستجو"  // Accessible label in Persian
+                onChange={(e) => handleSearch(e.target.value)}  // Update query as user types
+                defaultValue={searchParams.get('query') || ''}  // Keep the query in the input
+            />
+            <button type="submit" aria-label="ارسال جستجو"> {/* Accessible name in Persian */}
+                <FontAwesomeIcon icon={faSearch} className="hover:text-red-500 h-4 flex items-center"/>
+            </button>
+        </form>
+
     );
 }

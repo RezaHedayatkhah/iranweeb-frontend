@@ -75,29 +75,32 @@ export default function Hero() {
     return (
         <div ref={slideShowRef}>
             {loading ? (
-                <SkeletonHero />
+                <SkeletonHero/>
             ) : (
                 posts.map((post) => (
                     <div
                         key={post.id}
-                        className="mySlides w-full h-screen bg-gradient-to-t from-[#131720] from-10% to-[#131720]/40"
+                        className="mySlides w-full h-screen bg-gradient-to-t from-[#131720] from-10% to-[#131720]/40 relative"
+                        style={{minHeight: '100vh'}}  // Prevents layout shift
                     >
                         <Image
                             src={`${process.env.NEXT_PUBLIC_IMAGES_URL}/${isMobile ? post?.imageUrl : post?.backgroundImageUrl}`}
                             alt={post.title}
                             fill
-                            style={{ objectFit: "cover" }}
-                            className="-z-10 mt-24 md:mt-10 w-full h-screen"
-                            loading="lazy" // This enables lazy loading for the image
-                            placeholder={"blur"}
-                            blurDataURL={"iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mM0V1OrBwACIwEEp+JEOQAAAABJRU5ErkJggg=="}
+                            style={{objectFit: "cover"}}
+                            className="-z-10 w-full h-full"
+                            placeholder="blur"
+                            blurDataURL="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mM0V1OrBwACIwEEp+JEOQAAAABJRU5ErkJggg=="
+                            sizes="100vw"  // Optimizes image loading for various screen sizes
                         />
                         <div className="absolute inset-0">
                             <div className="w-full h-full pt-40 flex flex-col">
                                 <div className="w-11/12 md:w-4/5 m-auto h-full flex flex-col gap-10">
                                     <div className="flex flex-col gap-3">
                                         <span className="text-gray-400">{post.title}</span>
-                                        <h2 className="text-white text-3xl md:text-5xl lg:text-6xl">{post.originalTitle}</h2>
+                                        <h2 className="text-white text-3xl md:text-5xl lg:text-6xl">
+                                            {post.originalTitle}
+                                        </h2>
                                         <div className="flex gap-3">
                                             {post.genres?.slice(0, 4).map((genre) => (
                                                 <Link
@@ -113,7 +116,7 @@ export default function Hero() {
                                             {post.description}
                                         </p>
                                         <Link
-                                            className="w-fit text-white bg-red-500 hover:bg-red-600 rounded-bl-2xl rounded-tr-2xl px-5 py-1 transition duration-300"
+                                            className="w-fit text-white bg-red-600 hover:bg-red-600 rounded-bl-2xl rounded-tr-2xl px-5 py-1 transition duration-300"
                                             href={`${process.env.NEXT_PUBLIC_SITE_URL}/${post.contentType.toLowerCase()}/${post.slug}`}
                                         >
                                             ادامه...
@@ -127,16 +130,16 @@ export default function Hero() {
                                                 height={384}
                                                 slidesPerView={"auto"}
                                                 breakpoints={{
-                                                    320: { slidesPerView: 2, spaceBetween: 20 },
-                                                    480: { slidesPerView: 3, spaceBetween: 30 },
-                                                    800: { slidesPerView: 4, spaceBetween: 40 },
-                                                    1400: { slidesPerView: 5, spaceBetween: 40 },
-                                                    1700: { slidesPerView: 6, spaceBetween: 40 },
+                                                    320: {slidesPerView: 2, spaceBetween: 20},
+                                                    480: {slidesPerView: 3, spaceBetween: 30},
+                                                    800: {slidesPerView: 4, spaceBetween: 40},
+                                                    1400: {slidesPerView: 5, spaceBetween: 40},
+                                                    1700: {slidesPerView: 6, spaceBetween: 40},
                                                 }}
                                             >
                                                 {posts.map((post) => (
                                                     <SwiperSlide key={post.id}>
-                                                        <PostCard post={post} />
+                                                        <PostCard post={post}/>
                                                     </SwiperSlide>
                                                 ))}
                                             </Swiper>
@@ -149,5 +152,6 @@ export default function Hero() {
                 ))
             )}
         </div>
+
     );
 }
