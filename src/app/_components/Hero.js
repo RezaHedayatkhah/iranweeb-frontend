@@ -77,7 +77,7 @@ export default function Hero() {
             {loading ? (
                 <SkeletonHero/>
             ) : (
-                posts.map((post) => (
+                posts.map((post,index) => (
                     <div
                         key={post.id}
                         className="mySlides w-full h-screen bg-gradient-to-t from-[#131720] from-10% to-[#131720]/40 relative"
@@ -87,13 +87,13 @@ export default function Hero() {
                             src={`${process.env.NEXT_PUBLIC_IMAGES_URL}/${isMobile ? post?.imageUrl : post?.backgroundImageUrl}`}
                             alt={post.title}
                             fill
+                            priority={index === 0 ? true : false}  // Correctly setting priority for the first image
                             style={{objectFit: "cover"}}
-                            className="-z-10 w-full h-full"
+                            className="-z-10 w-full h-full absolute"
                             placeholder="blur"
                             blurDataURL="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mM0V1OrBwACIwEEp+JEOQAAAABJRU5ErkJggg=="
                             sizes="100vw"  // Optimizes image loading for various screen sizes
                         />
-                        <div className="absolute inset-0">
                             <div className="w-full h-full pt-40 flex flex-col">
                                 <div className="w-11/12 md:w-4/5 m-auto h-full flex flex-col gap-10">
                                     <div className="flex flex-col gap-3">
@@ -147,7 +147,6 @@ export default function Hero() {
                                     </div>
                                 </div>
                             </div>
-                        </div>
                     </div>
                 ))
             )}
