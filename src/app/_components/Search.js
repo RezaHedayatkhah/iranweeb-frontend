@@ -33,8 +33,7 @@ export default function Search() {
     };
 
     return (
-        <div className={`items-center justify-between bg-[#151f30] rounded-full text-gray-400 px-3 w-full flex `}>
-            <form className="w-full flex justify-center items-center" name="search" method="get" onSubmit={handleSubmit}>
+            <form className="w-full flex justify-between items-center bg-[#151f30] rounded-full text-gray-400 " name="search" method="get" onSubmit={handleSubmit}>
                 <input
                     type="text"
                     className="w-full rounded-full focus:outline-none bg-[#151f30] h-7 px-3"
@@ -44,9 +43,8 @@ export default function Search() {
                     defaultValue={searchParams.get('query') || ''}   // Keep the query in the input
                 />
                 <button type="submit">
-                    <FontAwesomeIcon icon={faSearch} className="hover:text-red-500" />
+                    <FontAwesomeIcon icon={faSearch} className="hover:text-red-500 h-4 flex items-center" />
                 </button>
             </form>
-        </div>
     );
 }

@@ -29,13 +29,13 @@ export default function Navbar() {
                 </h1>
 
                 <nav className="hidden md:grid grid-cols-4 gap-16">
-                    <Link href="/" aria-label="Home" className="hover:text-red-500">خانه</Link>
+                    <Link href="/" aria-label="Home" className="hover:text-red-500 h-8 flex items-center">خانه</Link>
                     <Link href="/manga" aria-label="Manga"
-                          className="hover:text-red-500">مانگا</Link>
+                          className="hover:text-red-500 h-8 flex items-center">مانگا</Link>
                     <Link href="/manhwa" aria-label="Manhwa"
-                          className="hover:text-red-500">مانهوا</Link>
+                          className="hover:text-red-500 h-8 flex items-center">مانهوا</Link>
                     <Link href="/manhua" aria-label="Manhua"
-                          className="hover:text-red-500">مانها</Link>
+                          className="hover:text-red-500 h-8 flex items-center">مانها</Link>
                 </nav>
 
                 <div className="flex items-center gap-5 md:w-1/3">
@@ -47,13 +47,13 @@ export default function Navbar() {
                     </div>
                     {user ? (
                             <Link href="/dashboard" className="hover:text-red-500 flex justify-center items-center gap-3 transition duration-300" aria-label="Dashboard">
-                                <span>داشبورد</span>
+                                <span className={"h-8 flex items-center"}>داشبورد</span>
                                 <FontAwesomeIcon icon={faHouseChimneyUser} className={"text-lg text-red-500"} />
                             </Link>
                         ) : (
                            <Link href="/login" className="hover:text-red-500 flex justify-center items-center gap-3 transition duration-300" aria-label="Login">
-                               <span>ورود</span>
-                               <FontAwesomeIcon icon={faRightToBracket} className={"text-lg text-red-500"} />
+                               <span className={"h-8 flex items-center w-1/2"}>ورود</span>
+                               <FontAwesomeIcon icon={faRightToBracket} className={"text-red-500 w-5 h-5"} />
                            </Link>
                     )}
                 </div>

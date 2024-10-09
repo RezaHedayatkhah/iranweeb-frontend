@@ -88,7 +88,7 @@ export default function Hero() {
                             fill
                             style={{ objectFit: "cover" }}
                             className="-z-10 mt-24 md:mt-10 w-full h-screen"
-                            priority={true}
+                            loading="lazy" // This enables lazy loading for the image
                             placeholder={"blur"}
                             blurDataURL={"iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mM0V1OrBwACIwEEp+JEOQAAAABJRU5ErkJggg=="}
                         />

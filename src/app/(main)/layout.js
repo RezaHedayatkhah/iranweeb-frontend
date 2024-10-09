@@ -3,10 +3,10 @@ import "@/app/globals.css";
 import {UserProvider} from "@/context/UserContext";
 import {Toaster} from 'react-hot-toast';
 import Navbar from "@/app/_components/Navbar";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faInstagram, faTelegram} from "@fortawesome/free-brands-svg-icons";
 import Script from "next/script";
 import Image from "next/image";
+import { Vazirmatn } from 'next/font/google'
+const vazirmatn = Vazirmatn({ subsets: ['latin', 'arabic'] })
 
 export const metadata = {
     keywords: ['ایران ویب', 'Iranweeb', 'Iran Weeb', 'دانلود مانگا', 'دانلود مانهوا', 'دانلود مانها', 'مانگا با ترجمه فارسی', 'مانهوا با ترجمه فارسی', 'مانها با ترجمه فارسی', 'وبسایت دانلود مانگا', 'وبسایت دانلود مانهوا', 'وبسایت دانلود مانها'],
@@ -44,7 +44,7 @@ export default function RootLayout({children}) {
 
 
         </head>
-        <body className="bg-[#131720] text-white min-h-screen flex flex-col antialiased ">
+        <body className={`bg-[#131720] text-white min-h-screen flex flex-col antialiased ${vazirmatn.className}`}>
         <UserProvider>
             <Toaster/>
             <Navbar/>
