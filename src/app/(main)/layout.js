@@ -28,20 +28,10 @@ export default function RootLayout({children}) {
             <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"/>
             <link rel="icon" type="image/png" sizes="16x16" href="/favicon.ico"/>
             <link rel="manifest" href="/site.webmanifest"/>
-            <Script
-                async
-                src="https://www.googletagmanager.com/gtag/js?id=G-5VFQ06XPXH"
-            />
 
-            <Script id="google-analytics">
-                {`
-              window.dataLayer = window.dataLayer || [];
-              function gtag(){dataLayer.push(arguments);}
-              gtag('js', new Date());
-              gtag('config', 'G-5VFQ06XPXH');
-          `}
-            </Script>
-
+            {/* Preconnect to Google Tag Manager */}
+            <link rel="preconnect" href="https://www.googletagmanager.com" />
+            <link rel="preconnect" href="https://www.google-analytics.com" />
 
         </head>
         <body className={`bg-[#131720] text-white min-h-screen flex flex-col antialiased ${vazirmatn.className}`}>
@@ -133,6 +123,16 @@ export default function RootLayout({children}) {
             </footer>
 
         </UserProvider>
+        {/* Google Analytics */}
+        <Script async src="https://www.googletagmanager.com/gtag/js?id=G-5VFQ06XPXH" />
+        <Script id="google-analytics" strategy="afterInteractive">
+            {`
+                      window.dataLayer = window.dataLayer || [];
+                      function gtag(){dataLayer.push(arguments);}
+                      gtag('js', new Date());
+                      gtag('config', 'G-5VFQ06XPXH');
+                    `}
+        </Script>
         </body>
 
         </html>
