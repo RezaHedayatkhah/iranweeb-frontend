@@ -25,9 +25,9 @@ export default function PostCard({post}) {
                                      className={"scale-0 group-hover:scale-100 transition-transform duration-300 ease-in-out text-4xl"}/>
                 </div>
                 <Image src={`${process.env.NEXT_PUBLIC_IMAGES_URL}/${post?.imageUrl}`} alt={post.title}
-                       width={0}
-                       height={0}
-                       sizes={"100vw"}
+                       width={250}
+                       height={350}
+                       // sizes={"100vw"}
                        className="w-full aspect-[2/3] rounded-2xl group-hover:blur-sm group-hover:brightness-50 transition duration-300 ease-in-out"/>
             </Link>
             <h3 className="peer-hover:text-blue-500 hover:text-blue-500 w-full text-sm font-medium mt-4 mb-1 text-center line-clamp-1"

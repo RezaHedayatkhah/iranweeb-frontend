@@ -85,9 +85,7 @@ export default function Hero() {
                         <Image
                             src={`${process.env.NEXT_PUBLIC_IMAGES_URL}/${isMobile ? post?.imageUrl : post?.backgroundImageUrl}`}
                             alt={post.title}
-                            quality={100}
                             fill
-                            sizes="100vw"
                             style={{ objectFit: "cover" }}
                             className="-z-10 mt-24 md:mt-10 w-full h-screen"
                             priority={true}
