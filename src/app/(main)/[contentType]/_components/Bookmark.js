@@ -57,19 +57,23 @@ export default function Bookmark({postId}){
 
     return (
         <>
-        {user ?
-                <button onClick={handleClick}>
-                    {bookmarked ? <FontAwesomeIcon icon={solidFaBookmark}
-                                                   className={"text-yellow-500 text-2xl"}/> :
-                        <FontAwesomeIcon icon={faBookmark}
-                                         className={"text-yellow-500 text-2xl"}/>}
+            {user ? (
+                <button
+                    onClick={handleClick}
+                    aria-label={bookmarked ? "Remove bookmark" : "Add bookmark"}
+                    className="focus:outline-none focus:ring-2 focus:ring-yellow-300 transition-transform duration-200 ease-in-out"
+                >
+                    <FontAwesomeIcon
+                        icon={bookmarked ? solidFaBookmark : faBookmark}
+                        className="text-yellow-500 text-2xl"
+                    />
                 </button>
-                :
-                <Link href={'/login'}>
-                    <FontAwesomeIcon icon={faBookmark}
-                                     className={"text-yellow-500 text-2xl"}/>
+            ) : (
+                <Link href="/login" aria-label="Login to bookmark">
+                    <FontAwesomeIcon icon={faBookmark} className="text-yellow-500 text-2xl" />
                 </Link>
-        }
+            )}
         </>
+
     )
 }

@@ -74,7 +74,7 @@ export default function DownloadLink({downloadLinks, postId}){
                         </Link>
                     ) : link.price > 0 ? (
                         <>
-                            <button className="w-fit text-white bg-red-500 hover:scale-110 rounded-2xl px-4 py-2"
+                            <button className="w-fit text-white bg-red-600 hover:scale-110 rounded-2xl px-4 py-2"
                                     onClick={openModal}>خرید
                             </button>
                             <Modal isOpen={isModalOpen} onClose={closeModal}>
@@ -98,7 +98,7 @@ export default function DownloadLink({downloadLinks, postId}){
                         </>
                     ) : (
                         <Link
-                            className="w-fit text-white bg-red-500 hover:scale-110 rounded-2xl px-4 py-2"
+                            className="w-fit text-white bg-red-600 hover:scale-110 rounded-2xl px-4 py-2"
                             href={link.url}
                         >
                             دانلود <FontAwesomeIcon icon={faDownload} />
