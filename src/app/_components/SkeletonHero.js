@@ -30,29 +30,6 @@ export default function SkeletonHero() {
                         <div className="text-white rounded-2xl h-8 w-16 animate-pulse bg-gray-600" />
                     </div>
 
-                    {/* Carousel section */}
-                    <div className="flex flex-col gap-3 h-full w-full">
-                        <div className="h-8 w-28 bg-gray-600 animate-pulse mb-4 rounded-md" />
-                        <div className="w-full">
-                            <Swiper
-                                spaceBetween={30}
-                                slidesPerView={"auto"}
-                                breakpoints={{
-                                    320: { slidesPerView: 2, spaceBetween: 20 },
-                                    480: { slidesPerView: 3, spaceBetween: 30 },
-                                    800: { slidesPerView: 4, spaceBetween: 40 },
-                                    1400: { slidesPerView: 5, spaceBetween: 40 },
-                                    1700: { slidesPerView: 6, spaceBetween: 40 },
-                                }}
-                            >
-                                {Array(10).fill(null).map((_, idx) => (
-                                    <SwiperSlide key={idx}>
-                                        <SkeletonPostCard />
-                                    </SwiperSlide>
-                                ))}
-                            </Swiper>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
