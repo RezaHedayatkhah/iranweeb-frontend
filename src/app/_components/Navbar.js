@@ -42,7 +42,7 @@ export default function Navbar() {
                 </h1>
 
                 {/* Desktop Navigation */}
-                <nav className="hidden md:flex gap-8">
+                <nav className="hidden md:flex gap-8 h-9 items-center justify-between w-56">
                     <Link href="/" aria-label="Home" className="hover:text-red-500">
                         خانه
                     </Link>

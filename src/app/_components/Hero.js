@@ -7,34 +7,10 @@ import Link from "next/link";
 import Image from "next/image";
 import SkeletonHero from "@/app/_components/SkeletonHero";
 
-export default function Hero() {
-    const [posts, setPosts] = useState([]);
+export default function Hero({ posts }) {
     const slideShowRef = useRef();
     const [isMobile, setIsMobile] = useState(false);
-    const [loading, setLoading] = useState(true);
-
-    useEffect(() => {
-        const fetchPosts = async () => {
-            try {
-                const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/hero-posts`, {
-                    method: "GET",
-                    headers: {
-                        Accept: "application/json",
-                    },
-                });
-                const data = await res.json();
-
-                if (res.ok) {
-                    setPosts(data);
-                    setLoading(false);
-                }
-            } catch (error) {
-                console.error("Error fetching hero posts:", error);
-            }
-        };
-
-        fetchPosts();
-    }, []);
+    const [activeIndex, setActiveIndex] = useState(0); // Track the active slide index
 
     useEffect(() => {
         const initSlideShow = () => {
@@ -42,21 +18,15 @@ export default function Hero() {
             if (slides && slides.length > 0) {
                 let slideIndex = 0;
                 const showSlides = () => {
-                    Array.from(slides).forEach((slide) => {
-                        slide.style.display = "none";
-                    });
-                    slideIndex++;
-                    if (slideIndex > slides.length) {
-                        slideIndex = 1;
-                    }
-                    slides[slideIndex - 1].style.display = "block";
-                    setTimeout(showSlides, 5000);
+                    slideIndex = (slideIndex + 1) % slides.length;
+                    setActiveIndex(slideIndex);
+                    setTimeout(showSlides, 5000); // Rotate every 5 seconds
                 };
                 showSlides();
             }
         };
 
-        if (posts.length > 0) {
+        if (posts?.length > 0) {
             initSlideShow();
         }
 
@@ -70,32 +40,34 @@ export default function Hero() {
         return () => window.removeEventListener("resize", handleResize);
     }, [posts]);
 
-
-
     return (
-        <div ref={slideShowRef}>
-            {loading ? (
-                <SkeletonHero/>
+        <>
+            {!posts ? (
+                <SkeletonHero />
             ) : (
-                posts.map((post,index) => (
-                    <div
-                        key={post.id}
-                        className="mySlides w-full h-screen bg-gradient-to-t from-[#131720] from-10% to-[#131720]/40 relative"
-                        style={{minHeight: '100vh'}}  // Prevents layout shift
-                    >
-                        <Image
-                            src={`${process.env.NEXT_PUBLIC_IMAGES_URL}/${isMobile ? post?.imageUrl : post?.backgroundImageUrl}`}
-                            alt={post.title}
-                            fill
-                            priority={index === 0 ? true : false}  // Correctly setting priority for the first image
-                            style={{objectFit: "cover"}}
-                            className="-z-10 w-full h-full absolute"
-                            placeholder="blur"
-                            blurDataURL="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mM0V1OrBwACIwEEp+JEOQAAAABJRU5ErkJggg=="
-                            sizes="100vw"  // Optimizes image loading for various screen sizes
-                        />
-                            <div className="w-full h-full pt-40 flex flex-col">
-                                <div className="w-11/12 md:w-4/5 m-auto h-full flex flex-col gap-10">
+                <div ref={slideShowRef} className="relative w-full h-screen overflow-hidden">
+                    {posts.map((post, index) => (
+                        <div
+                            key={post.id}
+                            className={`mySlides absolute inset-0 w-full h-screen transition-opacity duration-1000 ${
+                                index === activeIndex ? 'opacity-100 z-10' : 'opacity-0 z-0'
+                            }`}
+                        >
+                            {/* Image with lazy loading and priority optimization */}
+                            <Image
+                                src={`${process.env.NEXT_PUBLIC_IMAGES_URL}/${isMobile ? post?.imageUrl : post?.backgroundImageUrl}`}
+                                alt={post.title}
+                                fill
+                                priority={index === 0}
+                                style={{ objectFit: "cover" }}
+                                className="-z-10 w-full h-full absolute"
+                                placeholder="blur"
+                                blurDataURL="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mM0V1OrBwACIwEEp+JEOQAAAABJRU5ErkJggg=="
+                                sizes="100vw"
+                            />
+                            <div className="absolute inset-0 bg-gradient-to-t from-[#131720] from-10% to-[#131720]/40 z-0"></div>
+                            <div className="relative w-full h-full flex flex-col justify-center items-center z-10">
+                                <div className="w-11/12 md:w-4/5 m-auto h-auto flex flex-col gap-10">
                                     <div className="flex flex-col gap-3">
                                         <span className="text-gray-400">{post.title}</span>
                                         <h2 className="text-white text-3xl md:text-5xl lg:text-6xl">
@@ -122,35 +94,36 @@ export default function Hero() {
                                             ادامه...
                                         </Link>
                                     </div>
-                                    <div className="flex flex-col gap-2 h-full w-full">
-                                        <h2 className="text-white border-b-2 border-red-500 w-fit mb-3 text-lg">پیشنهادی</h2>
-                                        <div className="w-full">
-                                            <Swiper
-                                                spaceBetween={50}
-                                                height={384}
-                                                slidesPerView={"auto"}
-                                                breakpoints={{
-                                                    320: {slidesPerView: 2, spaceBetween: 20},
-                                                    480: {slidesPerView: 3, spaceBetween: 30},
-                                                    800: {slidesPerView: 4, spaceBetween: 40},
-                                                    1400: {slidesPerView: 5, spaceBetween: 40},
-                                                    1700: {slidesPerView: 6, spaceBetween: 40},
-                                                }}
-                                            >
-                                                {posts.map((post) => (
-                                                    <SwiperSlide key={post.id}>
-                                                        <PostCard post={post}/>
-                                                    </SwiperSlide>
-                                                ))}
-                                            </Swiper>
-                                        </div>
-                                    </div>
+                                    {/*<div className="flex flex-col gap-2 w-full">*/}
+                                    {/*    <h2 className="text-white border-b-2 border-red-500 w-fit mb-3 text-lg">پیشنهادی</h2>*/}
+                                    {/*    <div className="w-full">*/}
+                                    {/*        <Swiper*/}
+                                    {/*            spaceBetween={20}  // Smaller space between slides for better layout*/}
+                                    {/*            slidesPerView={2}   // Default number of slides*/}
+                                    {/*            breakpoints={{*/}
+                                    {/*                320: { slidesPerView: 2, spaceBetween: 10 },*/}
+                                    {/*                480: { slidesPerView: 3, spaceBetween: 15 },*/}
+                                    {/*                768: { slidesPerView: 4, spaceBetween: 20 },*/}
+                                    {/*                1024: { slidesPerView: 5, spaceBetween: 25 },*/}
+                                    {/*                1400: { slidesPerView: 6, spaceBetween: 30 },*/}
+                                    {/*            }}*/}
+                                    {/*        >*/}
+                                    {/*            {posts.map((post) => (*/}
+                                    {/*                <SwiperSlide key={post.id}>*/}
+                                    {/*                     <div className={"max-w-[220px]"}>*/}
+                                    {/*                         <PostCard post={post} />*/}
+                                    {/*                     </div>*/}
+                                    {/*                </SwiperSlide>*/}
+                                    {/*            ))}*/}
+                                    {/*        </Swiper>*/}
+                                    {/*    </div>*/}
+                                    {/*</div>*/}
                                 </div>
                             </div>
-                    </div>
-                ))
+                        </div>
+                    ))}
+                </div>
             )}
-        </div>
-
+        </>
     );
 }

@@ -1,54 +1,58 @@
 "use client";
 
-import {createContext, useContext, useEffect, useState} from 'react';
-import {useRouter} from 'next/navigation';
+import { createContext, useContext, useEffect, useState, useRef } from 'react';
+import { useRouter } from 'next/navigation';
 import checkAuthorizationCookie from "@/context/getCookie";
 
 const UserContext = createContext({});
 
-export function UserProvider({children}) {
+export function UserProvider({ children }) {
     const [user, setUser] = useState(null);
     const router = useRouter();
+    const isMounted = useRef(true); // Track component mounting status
 
     const getUserData = async () => {
-        if (!user && await checkAuthorizationCookie()) { // Only fetch user data if Authorization cookie exists
-            try {
+        try {
+            const hasAuthCookie = await checkAuthorizationCookie();
+            if (!user && hasAuthCookie) { // Only fetch if user isn't set and auth cookie exists
                 const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/user`, {
                     method: "GET",
                     credentials: 'include', // Include cookies in the request
                 });
-                const data = await res.json();
+
+                if (!isMounted.current) return; // Prevent state update if unmounted
+
                 if (res.ok) {
-                    setUser(data.user); // Set the user data if the response is successful
+                    const data = await res.json();
+                    setUser(data.user);
+                } else {
+                    await logout(); // Handle unauthorized session
                 }
-            } catch (error) {
-                await logout();
             }
+        } catch (error) {
+            console.error("Error fetching user data:", error);
         }
     };
 
-
     useEffect(() => {
+        isMounted.current = true;
+        getUserData(); // Fetch user data on mount
 
-        // Fetch user data when the component mounts
-        getUserData();
+        return () => { // Cleanup effect to prevent memory leaks
+            isMounted.current = false;
+        };
     }, []);
 
     const logout = async () => {
         try {
-            // Call the backend logout endpoint to clear the cookie
-            const response = await fetch(process.env.NEXT_PUBLIC_API_URL + "/api/logout", {
+            const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/logout`, {
                 method: 'POST',
                 credentials: 'include', // Include credentials (cookies) in the request
             });
 
             if (response.ok) {
-                console.log("logged out")
-                // Clear the user state
-                setUser(null);
-
-                // Redirect to the login page
-                router.push('/login');
+                setUser(null); // Clear user state
+                router.push('/login'); // Redirect to login page
             } else {
                 console.error("Failed to log out");
             }
@@ -57,10 +61,8 @@ export function UserProvider({children}) {
         }
     };
 
-
-
     return (
-        <UserContext.Provider value={{user, setUser, logout}}>
+        <UserContext.Provider value={{ user, setUser, logout }}>
             {children}
         </UserContext.Provider>
     );
@@ -69,4 +71,3 @@ export function UserProvider({children}) {
 export function useUser() {
     return useContext(UserContext);
 }
-
