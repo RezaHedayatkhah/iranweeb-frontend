@@ -5,7 +5,7 @@ import Link from "next/link";
 
 export default function PostCard({post}) {
     return (
-        <div className="flex flex-col items-center w-full h-full">
+        <div className="flex flex-col items-center max-w-[250px] h-full">
             <Link href={`/${post.contentType.toLowerCase()}/${post.slug}`}
                   className="group block relative w-full">
                 <div className="absolute flex justify-between items-center p-3 w-full z-50">

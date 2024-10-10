@@ -94,30 +94,30 @@ export default function Hero({ posts }) {
                                             ادامه...
                                         </Link>
                                     </div>
-                                    {/*<div className="flex flex-col gap-2 w-full">*/}
-                                    {/*    <h2 className="text-white border-b-2 border-red-500 w-fit mb-3 text-lg">پیشنهادی</h2>*/}
-                                    {/*    <div className="w-full">*/}
-                                    {/*        <Swiper*/}
-                                    {/*            spaceBetween={20}  // Smaller space between slides for better layout*/}
-                                    {/*            slidesPerView={2}   // Default number of slides*/}
-                                    {/*            breakpoints={{*/}
-                                    {/*                320: { slidesPerView: 2, spaceBetween: 10 },*/}
-                                    {/*                480: { slidesPerView: 3, spaceBetween: 15 },*/}
-                                    {/*                768: { slidesPerView: 4, spaceBetween: 20 },*/}
-                                    {/*                1024: { slidesPerView: 5, spaceBetween: 25 },*/}
-                                    {/*                1400: { slidesPerView: 6, spaceBetween: 30 },*/}
-                                    {/*            }}*/}
-                                    {/*        >*/}
-                                    {/*            {posts.map((post) => (*/}
-                                    {/*                <SwiperSlide key={post.id}>*/}
-                                    {/*                     <div className={"max-w-[220px]"}>*/}
-                                    {/*                         <PostCard post={post} />*/}
-                                    {/*                     </div>*/}
-                                    {/*                </SwiperSlide>*/}
-                                    {/*            ))}*/}
-                                    {/*        </Swiper>*/}
-                                    {/*    </div>*/}
-                                    {/*</div>*/}
+                                    <div className="flex flex-col gap-2 w-full">
+                                        <h2 className="text-white border-b-2 border-red-500 w-fit mb-3 text-lg">پیشنهادی</h2>
+                                        <div className="w-full">
+                                            <Swiper
+                                                spaceBetween={20}  // Smaller space between slides for better layout
+                                                slidesPerView={2}   // Default number of slides
+                                                breakpoints={{
+                                                    320: { slidesPerView: 2, spaceBetween: 10 },
+                                                    480: { slidesPerView: 3, spaceBetween: 15 },
+                                                    768: { slidesPerView: 3, spaceBetween: 20 },
+                                                    1024: { slidesPerView: 4, spaceBetween: 25 },
+                                                    1500: { slidesPerView: 5, spaceBetween: 30 },
+                                                }}
+                                            >
+                                                {posts.map((x) => (
+                                                    <SwiperSlide key={x.id}>
+                                                         <div className={`w-40 md:w-48 lg:w-56 ${post.id === x.id ? 'border-b-2 border-red-500 rounded-2xl pb-1': ''}`}>
+                                                             <PostCard post={x} />
+                                                         </div>
+                                                    </SwiperSlide>
+                                                ))}
+                                            </Swiper>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>

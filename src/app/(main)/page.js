@@ -15,7 +15,7 @@ async function fetchPosts(params) {
             headers: {
                 Accept: "application/json",
             },
-            cache: "force-cache",  // Cache for performance
+            next: { tags: ['posts'], revalidate: 86400 },
         });
 
         if (!res.ok) throw new Error("Failed to fetch posts");
@@ -35,9 +35,8 @@ const fetchHeroPosts = async () => {
             headers: {
                 Accept: "application/json",
             },
-            cache: "force-cache", // Cache for performance
+            next: { tags: ['posts'], revalidate: 86400 },
         });
-        console.log(res.data);
         if (!res.ok) throw new Error("Failed to fetch hero posts");
 
         return await res.json();
