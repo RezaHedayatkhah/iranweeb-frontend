@@ -2,7 +2,6 @@
 import Link from "next/link";
 import {UserProvider} from '@/context/UserContext';
 import Navbar from "@/app/(dashboard)/dashboard/_components/Navbar";
-import {useUser} from "@/context/UserContext";
 import {config} from '@fortawesome/fontawesome-svg-core'
 import '@fortawesome/fontawesome-svg-core/styles.css'
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
@@ -10,7 +9,8 @@ import {faBars} from "@fortawesome/free-solid-svg-icons";
 import "@/app/globals.css";
 import {useState} from "react";
 import {Toaster} from "react-hot-toast";
-
+import { Vazirmatn } from 'next/font/google'
+const vazirmatn = Vazirmatn({ subsets: ['latin', 'arabic'] })
 
 config.autoAddCss = false
 
@@ -24,7 +24,7 @@ export default function DashboardLayout({children}) {
 
     return (
         <html lang="fa" dir={'rtl'}>
-        <body className="bg-[#131720] text-white min-h-screen flex flex-col antialiased ">
+        <body className={`bg-[#131720] text-white min-h-screen flex flex-col antialiased ${vazirmatn.className}`}>
 
         <div className="bg-[#131720]">
             <UserProvider>

@@ -69,10 +69,10 @@ export default function Navbar({isActive}) {
                     <span>رسیدها</span>
                 </Link>
 
-                {/*<Link href="/" className="flex gap-2">*/}
-                {/*    <FontAwesomeIcon icon={faEnvelope} className={"text-xl text-red-500"}/>*/}
-                {/*    <span>تیکت ها</span>*/}
-                {/*</Link>*/}
+                <Link href="/dashboard/tickets" className="flex gap-2">
+                    <FontAwesomeIcon icon={faEnvelope} className={"text-xl text-red-500"}/>
+                    <span>تیکت ها</span>
+                </Link>
 
                 {user?.role === "ADMIN" &&
                     <>

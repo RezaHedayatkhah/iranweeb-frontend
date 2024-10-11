@@ -58,7 +58,7 @@ export default function Hero({ posts }) {
                                     fill
                                     priority={index === 0}
                                     style={{ objectFit: "cover" }}
-                                    className="w-full h-full "
+                                    className="w-full h-full"
                                     placeholder="blur"
                                     blurDataURL="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mM0V1OrBwACIwEEp+JEOQAAAABJRU5ErkJggg=="
                                     sizes="100vw"

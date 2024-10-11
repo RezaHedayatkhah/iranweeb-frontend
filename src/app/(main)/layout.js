@@ -79,7 +79,7 @@ export default function RootLayout({children}) {
                             <li><Link href="/contact-us"
                                       className="text-gray-300 text-sm hover:text-red-500 transition duration-300">تماس
                                 با ما</Link></li>
-                            <li><Link href="/"
+                            <li><Link href="/join-team"
                                       className="text-gray-300 text-sm hover:text-red-500 transition duration-300">درخواست
                                 عضویت در تیم</Link></li>
                             <li><Link href="/register"
