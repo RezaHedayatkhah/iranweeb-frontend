@@ -37,6 +37,15 @@ export default function RootLayout({children}) {
         <body className={`bg-[#131720] text-white min-h-screen flex flex-col antialiased ${vazirmatn.className}`}>
         <UserProvider>
             <Toaster/>
+            <div
+                className="bg-gradient-to-r from-yellow-400 via-amber-300 to-yellow-400 py-2 text-center text-black font-bold  shadow-md">
+                <span>ایران‌ویب استخدام می‌کند! </span>
+                <Link href="/join-team" className="underline hover:text-blue-600 transition-colors">
+                    همین حالا به تیم ما بپیوندید.
+                </Link>
+            </div>
+
+
             <Navbar/>
 
             <main>

@@ -85,6 +85,7 @@ export default function JoinTeamPage() {
                     </div>
                     <div>
                         <label className="block text-gray-300 mb-2" htmlFor="skills">مهارت‌ها</label>
+                        <span className={"text-red-500 text-xs"}>مترجم, کلینر, تایپیست, ادیتور...</span>
                         <input
                             type="text"
                             id="skills"
