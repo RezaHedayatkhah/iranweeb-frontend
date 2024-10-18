@@ -103,11 +103,11 @@ export default function Navbar({isActive}) {
                             <span>لیست کاربران</span>
                         </Link>
 
-                        {/*<Link href="/" className="flex gap-2">*/}
-                        {/*    <FontAwesomeIcon icon={faEnvelope} className={"text-xl text-red-500"}/>*/}
+                        <Link href="/dashboard/tickets/all" className="flex gap-2">
+                            <FontAwesomeIcon icon={faEnvelope} className={"text-xl text-red-500"}/>
 
-                        {/*    <span>تیکت های کاربران</span>*/}
-                        {/*</Link>*/}
+                            <span>تیکت های کاربران</span>
+                        </Link>
                     </>
                 }
 
