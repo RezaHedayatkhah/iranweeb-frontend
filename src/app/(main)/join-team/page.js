@@ -41,7 +41,7 @@ export default function JoinTeamPage() {
             </p>
             <div className="bg-[#151F30] rounded-2xl p-6 text-gray-200 shadow-lg">
                 <h2 className="text-2xl font-semibold mb-4">اطلاعات شما</h2>
-                <form className="bg-[#131720] p-5 rounded-2xl grid grid-cols-2 gap-5" onSubmit={handleSubmit}>
+                <form className="bg-[#131720] p-5 rounded-2xl grid grid-cols-1 md:grid-cols-2 gap-5" onSubmit={handleSubmit}>
                     <div>
                         <label className="block text-gray-300 mb-2" htmlFor="name">نام</label>
                         <input

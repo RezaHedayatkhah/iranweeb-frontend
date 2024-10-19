@@ -39,9 +39,9 @@ export default function RootLayout({children}) {
             <Toaster/>
             <div
                 className="bg-gradient-to-r from-yellow-400 via-amber-300 to-yellow-400 py-2 text-center text-black font-bold  shadow-md">
-                <span>ایران‌ویب استخدام می‌کند! </span>
+                <span>جهت همکاری با تیم ایران‌ویب </span>
                 <Link href="/join-team" className="underline hover:text-blue-600 transition-colors">
-                    همین حالا به تیم ما بپیوندید.
+                    اینجا کلیک کنید.
                 </Link>
             </div>
 

@@ -17,7 +17,7 @@ export default function Navbar({isActive}) {
 
     return (
         <div
-             className={`overflow-y-auto z-50 flex flex-col bg-[#131720] border-l border-blue-500 border-opacity-10 w-5/6 md:w-1/6 text-white h-screen  fixed top-0 md:-right-0 md:relative transform transition-transform duration-300 md:transform-none ${isActive ? "translate-x-0" : "translate-x-full"}`}>
+             className={`overflow-y-auto pb-5 z-50 flex flex-col bg-[#131720] border-l border-blue-500 border-opacity-10 w-5/6 md:w-1/6 text-white h-screen  fixed top-0 md:-right-0 md:relative transform transition-transform duration-300 md:transform-none ${isActive ? "translate-x-0" : "translate-x-full"}`}>
             <h1 className="p-5 text-3xl border-b border-blue-500 border-opacity-10"><Link href="/">Iran<span
                 className="text-red-500">Weeb</span></Link>
             </h1>
