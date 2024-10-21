@@ -7,25 +7,44 @@ import {useEffect, useState} from "react";
 
 export default function page() {
     const [transactions, setTransactions] = useState([]);
-    useEffect(() => {
-        async function fetchPosts() {
-            const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/user-transactions`, {
-                method: "GET",
-                headers: {
-                    "Content-Type": "application/json",
-                    "Accept": "application/json",
-                },
-                credentials: "include",
-            })
-            const data = await res.json();
+    const [loading, setLoading] = useState(true);
 
-            if (res.ok) {
-                setTransactions(data)
+    useEffect(() => {
+        async function fetchTransactions() {
+            try {
+                const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/user-transactions`, {
+                    method: "GET",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Accept": "application/json",
+                    },
+                    credentials: "include",
+                });
+                const data = await res.json();
+
+                if (res.ok) {
+                    setTransactions(data);
+                } else {
+                    setTransactions([]);
+                }
+            } catch (error) {
+                console.error("Error fetching transactions:", error);
+                setTransactions([]);
+            } finally {
+                setLoading(false);
             }
         }
 
-        fetchPosts()
+        fetchTransactions();
     }, []);
+
+    if (loading) {
+        return <div className="w-full flex justify-center py-10">در حال بارگذاری...</div>;
+    }
+
+    if (transactions.length === 0) {
+        return <div className="w-full flex justify-center py-10">هیچ خریدی پیدا نشد.</div>;
+    }
     return (
         <div className="w-full flex flex-col gap-2">
             <div
