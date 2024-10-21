@@ -41,7 +41,7 @@ export default function DashboardLayout({children}) {
                     </div>
                     <div className="flex w-full gap-5 flex-col md:flex-row">
                         <Navbar isActive={isActive}/>
-                        <div className=" text-white bg-[#131720] w-full px-5 pb-5">
+                        <div className=" text-white bg-[#131720] w-full px-5 md:pl-5 pb-5 md:pr-[295px]">
                             {children}
                         </div>
                     </div>

@@ -8,7 +8,7 @@ import {useEffect, useState} from "react";
 export default function page() {
     const [transactions, setTransactions] = useState([]);
     useEffect(() => {
-        async function fetchPosts (){
+        async function fetchPosts() {
             const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/user-transactions`, {
                 method: "GET",
                 headers: {
@@ -23,6 +23,7 @@ export default function page() {
                 setTransactions(data)
             }
         }
+
         fetchPosts()
     }, []);
     return (
@@ -60,7 +61,7 @@ export default function page() {
                         </tr>
                         </thead>
                         <tbody>
-                        {transactions.filter((e)=> e.type === 'DEBIT').map((transaction) => (
+                        {transactions?.filter((e) => e.type === 'DEBIT').map((transaction) => (
                             <tr key={transaction.id} className="bg-[#151f30] ">
                                 <td className="rounded-r-2xl p-5 text-sm">
                                     <div>{transaction.id}</div>
