@@ -94,15 +94,15 @@ export default function Page() {
                                             <p className="line-clamp-1">{post?.title || "ناموجود"}</p>
                                         </td>
                                         <td className="p-5 text-sm">
-                                            <span>{transaction.downloadLink.label || "ناموجود"}</span>
+                                            <span>{transaction.downloadLink?.label || "ناموجود"}</span>
                                         </td>
                                         <td className="p-5 text-sm">
-                                            <span>{transaction.downloadLink.description || "توضیحات موجود نیست"}</span>
+                                            <span>{transaction.downloadLink?.description || "توضیحات موجود نیست"}</span>
                                         </td>
                                         <td className="rounded-l-2xl p-5 text-sm">
                                             <Link
                                                 className="bg-green-600 hover:bg-green-900 w-fit h-fit rounded-xl p-2"
-                                                href={transaction.downloadLink.url || "#"}
+                                                href={transaction.downloadLink?.url || "#"}
                                             >
                                                 <FontAwesomeIcon icon={faLink}/>
                                             </Link>
