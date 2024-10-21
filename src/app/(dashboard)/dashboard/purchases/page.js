@@ -23,8 +23,10 @@ export default function page() {
                 const data = await res.json();
 
                 if (res.ok) {
+                    console.log(data)
                     setTransactions(data);
                 } else {
+                    console.log(data)
                     setTransactions([]);
                 }
             } catch (error) {
